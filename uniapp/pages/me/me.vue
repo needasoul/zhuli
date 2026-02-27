@@ -28,6 +28,20 @@
 			</view>
 		</view>
 
+		<!-- 账户余额 / 金币 概览 -->
+		<view class="account-card zindex">
+			<view class="account-item" @click="routerGo('/pagesB/wallet/wallet')">
+				<view class="account-label">账户余额(元)</view>
+				<view class="account-value">{{ intall.balance || 0 }}</view>
+				<view class="account-link">去充值 ></view>
+			</view>
+			<view class="account-item">
+				<view class="account-label">我的金币</view>
+				<view class="account-value">{{ intall.integral ? intall.integral : 0 }}</view>
+				<view class="account-link">赚金币玩法</view>
+			</view>
+		</view>
+
 		<view class="vip_box zindex flexc flexs" @click="routerGo('/pagesB/myMembers/myMembers')">
 			<view class="vip_box_left">
 				定馆会员
@@ -281,6 +295,43 @@
 		// #ifdef MP-WEIXIN
 		z-index: -1;
 		// #endif
+	}
+
+	.account-card {
+		width: 690rpx;
+		margin: 0 auto 24rpx;
+		display: flex;
+		justify-content: space-between;
+		background: #ffffff;
+		border-radius: 24rpx;
+		padding: 24rpx 32rpx;
+		box-sizing: border-box;
+		box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.04);
+	}
+
+	.account-item {
+		width: 48%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.account-label {
+		font-size: 24rpx;
+		color: #888888;
+		margin-bottom: 8rpx;
+	}
+
+	.account-value {
+		font-size: 40rpx;
+		font-weight: 700;
+		color: #ff7a00;
+		margin-bottom: 8rpx;
+	}
+
+	.account-link {
+		font-size: 22rpx;
+		color: #ff7a00;
 	}
 
 	.top-box {
