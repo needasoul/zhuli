@@ -1,0 +1,187 @@
+<style>
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+    }
+    .table th,
+    .table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    .table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+    .table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .table tr:hover {
+        background-color: #f1f1f1;
+    }
+    .table img {
+        max-width: 50px;
+        height: auto;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .control-label {
+        font-weight: bold;
+    }
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        padding: 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .card-header {
+        font-size: 18px;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    .card-body {
+        margin-bottom: 10px;
+    }
+    .card-body p {
+        margin: 5px 0;
+    }
+    .card-body img {
+        max-width: 100px;
+        height: auto;
+        margin-right: 10px;
+    }
+    .hide {
+        display: none;
+    }
+</style>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>{:__('Title')}</th>
+        <th>{:__('Content')}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{:__('Order_no')}</td>
+        <td style="word-break: break-all;">{$row['order_no']}</td>
+    </tr>
+    <tr>
+        <td>{:__('Order_type')}</td>
+        <td style="word-break: break-all;">{php}{ if($row['order_type'] == "1"){echo "积分订单";} elseif ($row['order_type'] == "2") {echo "商品订单";} elseif($row['order_type'] == "3") {echo "课程订单";} elseif($row['order_type'] == "4") {echo "活动订单";} else {echo "充值订单";}}{/php}</td>
+    </tr>
+    <tr>
+        <td>{:__('下单用户')}</td>
+        <td style="word-break: break-all;">{$row['user']['username']}</td>
+    </tr>
+    <tr>
+        <td>{:__('Coupon_state')}</td>
+        <td style="word-break: break-all;">{php}{ if($row['coupon_state']){echo "是";} else {echo "否";}}{/php}</td>
+    </tr>
+    <?php if($row['coupon_state']){ ?>
+    <tr>
+        <td>{:__('优惠券名称')}</td>
+        <td style="word-break: break-all;">{$row['coupon']['title']}</td>
+    </tr>
+    <?php } ?>
+    <?php if($row['order_type'] == 3){ ?>
+    <tr>
+        <td>{:__('课程名称')}</td>
+        <td style="word-break: break-all;">{$row['lesson']['title']}</td>
+    </tr>
+    <tr>
+        <td>{:__('购买类型')}</td>
+        <td style="word-break: break-all;">{$row['lesson_type']}</td>
+    </tr>
+    <?php } ?>
+    <tr>
+        <td>{:__('Status')}</td>
+        <td style="word-break: break-all;">{php}{ if($row['status'] == "1"){echo "待付款";} elseif ($row['status'] == "2") {echo "待核销";} elseif($row['status'] == "3") {echo "已完成";} elseif($row['status'] == "4") {echo "待退款";}elseif($row['status'] == "5") {echo "已取消";}elseif($row['status'] == "6") {echo "已退款";}elseif($row['status'] == "7") {echo "待自提";} else {echo "已取消";}}{/php}</td>
+    </tr>
+    {if condition="($row['order_type'] != '2')"}
+    <tr>
+        <td>{:__('Goods_name')}</td>
+        <td style="word-break: break-all;">{$row['goods_name']}</td>
+    </tr>
+    {/if}
+    <tr>
+        <td>{:__('Goods_count')}</td>
+        <td style="word-break: break-all;">{$row['goods_count']}</td>
+    </tr>
+    <tr>
+        <td>{:__('Goods_price')}</td>
+        <td style="word-break: break-all;">￥{$row['goods_price']}</td>
+    </tr>
+    <tr>
+        <td>{:__('Goods_prices')}</td>
+        <td style="word-break: break-all;">￥{$row['goods_prices']}</td>
+    </tr>
+    <tr>
+        <td>{:__('Order_amount_total')}</td>
+        <td style="word-break: break-all;">￥{$row['order_amount_total']}</td>
+    </tr>
+    <tr>
+        <td>{:__('Pay_channel')}</td>
+        <td style="word-break: break-all;">{php}{ if($row['pay_channel'] == "0"){echo "积分支付";} elseif ($row['pay_channel'] == "1") {echo "微信支付";} elseif($row['pay_channel'] == "2") {echo "支付宝支付";}}{/php}</td>
+    </tr>
+    <tr>
+        <td>{:__('Out_trade_no')}</td>
+        <td style="word-break: break-all;">{$row['out_trade_no']|default='-'}</td>
+    </tr>
+    <tr>
+        <td>{:__('Remark')}</td>
+        <td style="word-break: break-all;">{$row['remark']|default='-'}</td>
+    </tr>
+    <tr>
+        <td>{:__('Pay_time')}</td>
+        <td style="word-break: break-all;">{php}{ if($row['pay_time'] == null){echo "-";} else echo date("Y-m-d H:i:s",$row['pay_time']); }{/php}</td>
+    </tr>
+    </tbody>
+</table>
+
+{if condition="($row['order_type'] eq '2')"}
+<div class="card">
+    <div class="card-header">{:__('商品详情')}</div>
+    <div class="card-body">
+        {foreach name="data" id="rows"}
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <img src="{$rows.venue_image|htmlentities|cdnurl}" alt="{:__('场馆图片')}">
+            <div style="flex-grow: 1;">
+                <p><strong>{:__('场馆名称')}:</strong> {$rows['venue_title']}</p>
+                <p><strong>{:__('场地名称')}:</strong> {$rows['area_title']}</p>
+                <p><strong>{:__('预定时间')}:</strong> {$rows['fixed_date']}-{$rows['start_times']}-{$rows['end_times']}</p>
+                <p><strong>{:__('状态')}:</strong> {$rows['write']}</p>
+            </div>
+            <div>
+                <img src="{$rows.code|htmlentities|cdnurl}" alt="{:__('核销码')}">
+            </div>
+        </div>
+        {/foreach}
+    </div>
+</div>
+{/if}
+
+{if condition="($row['order_type'] eq '4')"}
+<div class="card">
+    <div class="card-header">{:__('入场名单')}</div>
+    <div class="card-body">
+        {foreach name="name_list" id="rows"}
+        <div style="display: flex; align-items: center; margin-bottom: 5px;">
+            <p><strong>{:__('姓名')}:</strong> {$rows['name']}</p>
+            <p style="margin-left: 20px;"><strong>{:__('手机号')}:</strong> {$rows['mobile']}</p>
+        </div>
+        {/foreach}
+    </div>
+</div>
+{/if}
+
+<div class="hide layer-footer">
+    <label class="control-label col-xs-12 col-sm-2"></label>
+    <div class="col-xs-12 col-sm-8">
+        <button type="reset" class="btn btn-primary btn-embossed btn-close" onclick="Layer.closeAll();">{:__('Close')}</button>
+    </div>
+</div>

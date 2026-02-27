@@ -1,0 +1,37 @@
+
+/* 行为相关颜色 */
+$uni-color-success: #09bb07;
+.flexc{
+        display: flex;
+        align-content: center;
+}
+.flex{
+        display: flex;
+}
+.flexs{
+        display: flex;
+        justify-content: space-between;
+}
+.flexw{
+        display: flex;
+        flex-wrap: wrap;
+}
+.me-text-beyond {
+        /*文本内容超宽度省略号显示 单行*/
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        // width: 100%;
+}
+
+.me-text-beyond-multi {
+        /*文本内容超宽度省略号显示 多行*/
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+}
+@import '@/uni_modules/uview-ui/theme.scss';
+
+

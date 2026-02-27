@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="74px" height="74px" viewBox="0 0 74 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>首页</title>
+    <defs>
+        <polygon id="path-1" points="0 0 60 0 60 60 0 60"></polygon>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#FFCD2B" offset="0%"></stop>
+            <stop stop-color="#FF9E00" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="餐饮预订商家版" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页" transform="translate(-428.000000, -612.000000)">
+            <rect fill="#FAFAFA" x="0" y="0" width="750" height="1895"></rect>
+            <rect id="矩形备份-11" fill="#FFFFFF" x="18" y="593" width="700" height="290" rx="10"></rect>
+            <g id="编组-8" transform="translate(428.000000, 612.000000)">
+                <rect id="矩形备份-4" x="0" y="0" width="74" height="74"></rect>
+                <g id="编组-7" transform="translate(4.000000, 3.000000)">
+                    <g id="编组" transform="translate(0.000000, 9.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <g id="Clip-2"></g>
+                        <path d="M60.0007984,12.5 L31.3117066,12.5 L31.3117066,0 L50.0851585,0 C51.6419618,0 53.0790111,0.748 54.0130931,1.936 L60.0007984,12.5 Z M28.6890917,12.5 L0,12.5 L5.98770525,1.936 C6.92178726,0.688 8.35484472,0 9.91563989,0 L28.6890917,0 L28.6890917,12.5 Z M29.9385262,50 L49.9614126,50 L49.9614126,45 L29.9385262,45 L29.9385262,50 Z M34.9282806,40 L49.9614126,40 L49.9614126,35 L34.9282806,35 L34.9282806,40 Z M0.0598770525,57.5 C0.0598770525,58.876 1.18556564,60 2.55475424,60 L57.4420523,60 C58.8152327,60 59.9369295,58.876 59.9369295,57.5 L59.9369295,15 L0.0598770525,15 L0.0598770525,57.5 Z" id="Fill-1" fill="url(#linearGradient-3)" mask="url(#mask-2)"></path>
+                    </g>
+                    <circle id="椭圆形备份-7" cx="53" cy="13" r="13"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

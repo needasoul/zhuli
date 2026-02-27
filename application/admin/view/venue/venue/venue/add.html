@@ -1,0 +1,178 @@
+<style>
+    .upload-image {
+        background: url('/assets/addons/example/img/plus.png') no-repeat center center;
+        background-size: 30px 30px;
+        height: 30px;
+        width: 30px;
+        border: 1px solid #ccc;
+    }
+
+</style>
+<form id="add-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Name')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-name" class="form-control" data-rule="required" name="row[name]" type="text" value="">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Venue_type_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-venue_type_id"  data-rule="required" data-field="venue_type" data-multiple="true" data-source="venue/venue/type/index" class="form-control selectpage" name="row[venue_type_id]" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Tel')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-tel" class="form-control" data-rule="required" name="row[tel]" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('联系人')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-lx_name" class="form-control" data-rule="required" name="row[lx_name]" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('标识')}:</label>
+        <div class="col-xs-12 col-sm-8">
+
+            <select  id="c-flag" class="form-control selectpicker" multiple="" name="row[flag][]">
+                {foreach name="flagList" item="vo"}
+                <option value="{$key|htmlentities}" {in name="key" value=""}selected{/in}>{$vo|htmlentities}</option>
+                {/foreach}
+            </select>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Address')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="hidden" class="form-control" name="row[lon]" id="lng" placeholder="经度">
+            <input type="hidden" class="form-control" name="row[lat]" id="lat" placeholder="纬度">
+            <input id="address" class="form-control address" data-rule="required" name="row[address]" type="text" value="">
+            <button type="button" class="btn btn-primary" data-toggle="addresspicker" data-input-id="address" data-lng-id="lng" data-lat-id="lat">点击选择地址</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('场馆详情图')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group">
+                <input id="c-images1" class="form-control" size="50" name="row[images]" type="text" value="">
+                <div class="input-group-addon no-border no-padding">
+                    <span><button type="button" id="faupload-images1" class="btn btn-danger faupload" data-input-id="c-images1" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp,image/webp" data-multiple="true" data-preview-id="p-images1"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                    <span><button type="button" id="fachoose-images1" class="btn btn-primary fachoose" data-input-id="c-images1" data-mimetype="image/*" data-multiple="true"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                </div>
+                <span class="msg-box n-right" for="c-images1"></span>
+            </div>
+            <ul class="row list-inline faupload-preview" id="p-images1"></ul>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Image')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group">
+                <input id="c-image" class="form-control" data-rule="required" size="50" name="row[image]" type="text" value="">
+                <div class="input-group-addon no-border no-padding">
+                    <span><button type="button" id="faupload-image" class="btn btn-danger faupload" data-input-id="c-image" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp,image/webp" data-multiple="false" data-preview-id="p-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                    <span><button type="button" id="fachoose-image" class="btn btn-primary fachoose" data-input-id="c-image" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                </div>
+                <span class="msg-box n-right" for="c-image"></span>
+            </div>
+            <ul class="row list-inline faupload-preview" id="p-image"></ul>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Image_plan')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group">
+            <input id="c-image_plan" size="50" class="form-control" data-rule="required" name="row[image_plan]" type="text" value="">
+            <div class="input-group-addon no-border no-padding">
+                <span><button type="button" id="faupload-images" class="btn btn-danger faupload" data-input-id="c-image_plan" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp,image/webp" data-multiple="false" data-preview-id="p-images"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                <span><button type="button" id="fachoose-images" class="btn btn-primary fachoose" data-input-id="c-image_plan" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+            </div>
+                <span class="msg-box n-right" for="c-image_plan"></span>
+            </div>
+            <ul class="row list-inline faupload-preview" id="p-images"></ul>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Multiplejson')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            
+            <table class="table fieldlist" data-name="row[multiplejson]" data-template="row[multiplejson]tpl" id="second-table">
+                <tr>
+                    <td>{:__('multiplejson title')}</td>
+                    <td>{:__('multiplejson image')}</td>
+                    <td width="90">{:__('Operate')}</td>
+                </tr>
+                <tr>
+                <td colspan="3">
+                <a href="javascript:;" class="btn btn-sm btn-success btn-append"><i class="fa fa-plus"></i> {:__('Append')}</a>
+                <textarea name="row[multiplejson]" class="form-control hide" cols="30" rows="5"></textarea>
+                </td>
+                </tr>
+            </table>
+            <script type="text/html" id="row[multiplejson]tpl">
+                <tr>
+                    <td><input type="text" name="<%=name%>[<%=index%>][title]" class="form-control" value="<%=row.title%>"/></td>
+                    <td>
+                        <input type="hidden" name="<%=name%>[<%=index%>][image]" id="c-image-<%=index%>" value="<%=row.image%>">
+                        <button type="button" id="faupload-imagess" class="btn btn-danger faupload upload-image" data-input-id="c-image-<%=index%>" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp,image/webp" data-multiple="false" <%if(row.image){%>style="background-image: url('<%=Fast.api.cdnurl(row.image)%>')"<%}%>></button>
+
+                    </td>
+                    <td width="90">
+                        <span class="btn btn-sm btn-danger btn-remove"><i class="fa fa-times"></i></span>
+                        <span class="btn btn-sm btn-primary btn-dragsort"><i class="fa fa-arrows"></i></span>
+                    </td>
+                </tr>
+            </script>
+
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Content')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea id="c-content" class="form-control editor" data-rule="required" rows="5" name="row[content]" cols="50"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('预订赠送积分')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-reward_points" class="form-control" data-rule="required" name="row[reward_points]" type="number" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Weigh')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-weigh" class="form-control" name="row[weigh]" type="number" value="0">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('State')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            
+            <div class="radio">
+            {foreach name="stateList" item="vo"}
+            <label for="row[state]-{$key|htmlentities}"><input id="row[state]-{$key|htmlentities}" name="row[state]" type="radio" value="{$key|htmlentities}" {in name="key" value="1"}checked{/in} /> {$vo|htmlentities}</label>
+            {/foreach}
+            </div>
+
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-primary btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

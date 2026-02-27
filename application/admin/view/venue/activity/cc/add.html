@@ -1,0 +1,64 @@
+<form id="add-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Activity_id')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-activity_id" min="0" data-rule="required" data-source="venue/activity/activity/index" data-field="title" class="form-control selectpage" name="row[activity_id]" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Title')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-title" class="form-control" name="row[title]" type="text">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Start_times')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-start_times" class="form-control datetimepicker" data-date-format="HH:mm:ss" data-use-current="true" name="row[start_times]" type="text" value="{:date('H:i:s')}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('End_times')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-end_times" class="form-control datetimepicker" data-date-format="HH:mm:ss" data-use-current="true" name="row[end_times]" type="text" value="{:date('H:i:s')}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Enroll_num')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-enroll_num" class="form-control" name="row[enroll_num]" type="number" value="0">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Activity_price')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-activity_price" min="0" class="form-control" step="0.01" name="row[activity_price]" type="number" value="0.00">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Weigh')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-weigh" class="form-control" name="row[weigh]" type="number" value="0">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('State')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            
+            <div class="radio">
+            {foreach name="stateList" item="vo"}
+            <label for="row[state]-{$key|htmlentities}"><input id="row[state]-{$key|htmlentities}" name="row[state]" type="radio" value="{$key|htmlentities}" {in name="key" value="1"}checked{/in} /> {$vo|htmlentities}</label>
+            {/foreach}
+            </div>
+
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-primary btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,64 @@
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Name')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-name" class="form-control" data-rule="required" name="row[name]" type="text" value="{$row.name|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Start_times')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-start_times" data-rule="required" class="form-control datetimepicker" data-date-format="HH:mm:ss" data-use-current="true" name="row[start_times]" type="text" value="{$row.start_times|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('End_times')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-end_times" data-rule="required" class="form-control datetimepicker" data-date-format="HH:mm:ss" data-use-current="true" name="row[end_times]" type="text" value="{$row.end_times|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Interval_time')}:</label>
+        <div class="col-xs-12 col-sm-8">
+
+            <select  id="c-Interval_time" class="form-control selectpicker" name="row[interval_time]">
+                {foreach name="intervalList" item="vo"}
+                <option value="{$key|htmlentities}" {in name="key" value="$row.interval_time"}selected{/in}>{$vo|htmlentities}</option>
+                {/foreach}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Price')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-price" min="0" data-rule="required" class="form-control" step="0.01" name="row[price]" type="number" value="{$row.price|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Weigh')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-weigh" class="form-control" name="row[weigh]" type="number" value="{$row.weigh|htmlentities}">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('State')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            
+            <div class="radio">
+            {foreach name="stateList" item="vo"}
+            <label for="row[state]-{$key|htmlentities}"><input id="row[state]-{$key|htmlentities}" name="row[state]" type="radio" value="{$key|htmlentities}" {in name="key" value="$row.state"}checked{/in} /> {$vo|htmlentities}</label>
+            {/foreach}
+            </div>
+
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-primary btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

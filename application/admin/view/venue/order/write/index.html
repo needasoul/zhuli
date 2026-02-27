@@ -1,0 +1,29 @@
+
+<div class="row animated fadeInRight">
+    <div class="col-md-4">
+        <div class="box box-primary">
+            <div class="panel-heading">
+                {:__('订单核销')}
+            </div>
+            <div class="panel-body">
+
+                <form id="update-form" role="form" data-toggle="validator" method="POST" action="">
+                    <div class="box-body box-profile">
+
+                        <div class="form-group">
+                            <label for="code" class="control-label">{:__('核销码')}:</label>
+                            <input type="text" class="form-control" id="code" name="code" value="" data-rule="required;"/>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">{:__('Submit')}</button>
+                            <button type="reset" class="btn btn-default">{:__('Reset')}</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>

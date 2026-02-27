@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="700px" height="350px" viewBox="0 0 700 350" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>余额明细备份</title>
+    <defs>
+        <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#10A7FF" offset="0%"></stop>
+            <stop stop-color="#1870FF" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="700" height="350" rx="30"></rect>
+        <linearGradient x1="43.8098313%" y1="37.7837316%" x2="52.8325789%" y2="44.2238765%" id="linearGradient-4">
+            <stop stop-color="#5C54FF" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#2581FF" stop-opacity="0.652507649" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="餐饮预订商家版" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="画板" transform="translate(-47.000000, -38.000000)">
+            <g id="路径-2-+-路径-3蒙版备份" transform="translate(47.000000, 38.000000)">
+                <mask id="mask-3" fill="white">
+                    <use xlink:href="#path-2"></use>
+                </mask>
+                <use id="蒙版" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                <path d="M135.360906,-4 L172.556295,151.455104 C180.792083,185.87591 170.22007,222.086127 144.757638,246.668329 L-0.0810726564,386.5 L-0.0810726564,386.5 L-0.0810726564,-23.84227 L135.360906,-4 Z" id="路径-2" fill="url(#linearGradient-4)" mask="url(#mask-3)"></path>
+                <path d="M473.591732,247.687645 L545.936807,471.333333 L545.936807,471.333333 L747.159014,408.573075 L691.335361,-77 L493.202284,151.377944 C470.251462,177.832192 462.812599,214.365314 473.591732,247.687645 Z" id="路径-3" fill-opacity="0.156605114" fill="#5C54FF" mask="url(#mask-3)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

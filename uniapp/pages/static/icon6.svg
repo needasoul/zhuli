@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="74px" height="74px" viewBox="0 0 74 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>首页</title>
+    <defs>
+        <polygon id="path-1" points="0 0 60 0 60 60 0 60"></polygon>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#00E6C2" offset="0%"></stop>
+            <stop stop-color="#00D48D" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#00E3BA" offset="0%"></stop>
+            <stop stop-color="#00D694" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="餐饮预订商家版" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页" transform="translate(-607.000000, -612.000000)">
+            <rect fill="#FAFAFA" x="0" y="0" width="750" height="1895"></rect>
+            <rect id="矩形备份-11" fill="#FFFFFF" x="18" y="593" width="700" height="290" rx="10"></rect>
+            <g id="编组-10" transform="translate(607.000000, 612.000000)">
+                <rect id="矩形备份-5" x="0" y="0" width="74" height="74"></rect>
+                <g id="编组-9" transform="translate(4.000000, 2.000000)">
+                    <g id="编组" transform="translate(0.000000, 11.000000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <g id="Clip-2"></g>
+                        <path d="M60.0014559,9.60151872 C60.0014559,4.43203183 55.5827864,0 50.4288851,0 L9.568931,0 C4.41502979,0 0,4.43203183 0,9.60151872 L0,50.4024971 C0,55.5683332 4.41502979,60.0003651 9.568931,60.0003651 L50.2432573,60.0003651 C55.3971586,60.0003651 59.8158281,55.5683332 59.8158281,50.4024971 L59.8158281,40.2497125 L38.2830035,40.2497125 C38.2830035,40.0635234 29.9989081,40.8009784 29.9989081,30.4620046 C29.9989081,19.3855758 39.0182352,20.1230309 39.0182352,20.1230309 L60.0014559,20.1230309 L60.0014559,9.60151872 Z" id="Fill-1" fill="url(#linearGradient-3)" mask="url(#mask-2)"></path>
+                    </g>
+                </g>
+            </g>
+            <path d="M644.864334,655.278736 C644.864334,662.47805 651.306711,661.740595 651.306711,661.740595 L670.266224,661.740595 L670.266224,647.893233 L651.856314,647.893233 C651.856314,648.079422 644.864334,647.524506 644.864334,655.278736" id="Fill-3" fill="url(#linearGradient-4)"></path>
+            <path d="M652.041942,652.139076 C653.330417,652.139076 654.433265,653.245259 654.433265,654.53763 C654.433265,655.461274 653.883661,656.20238 653.148429,656.753646 C652.413198,657.122374 651.492338,657.122374 650.753467,656.753646 C650.018235,656.384919 649.464992,655.461274 649.464992,654.53763 C649.650619,653.245259 650.753467,652.139076 652.041942,652.139076" id="路径" fill="#FFFFFF"></path>
+        </g>
+    </g>
+</svg>

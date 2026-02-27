@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="700px" height="250px" viewBox="0 0 700 250" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>首页</title>
+    <defs>
+        <linearGradient x1="4.77048956e-16%" y1="43.622449%" x2="95.1949419%" y2="56.377551%" id="linearGradient-1">
+            <stop stop-color="#00ADFF" offset="0%"></stop>
+            <stop stop-color="#1072FF" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="700" height="250" rx="10"></rect>
+    </defs>
+    <g id="餐饮预订商家版" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页" transform="translate(-25.000000, -218.000000)">
+            <rect fill="#FAFAFA" x="0" y="0" width="750" height="1895"></rect>
+            <path d="M25,455 L725,455 L725,542 C725,547.522847 720.522847,552 715,552 L35,552 C29.4771525,552 25,547.522847 25,542 L25,455 L25,455 Z" id="矩形" fill="#FFFFFF"></path>
+            <g id="椭圆形-+-椭圆形备份-+-椭圆形备份-2蒙版" transform="translate(25.000000, 218.000000)">
+                <mask id="mask-3" fill="white">
+                    <use xlink:href="#path-2"></use>
+                </mask>
+                <use id="蒙版" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                <circle id="椭圆形备份" fill="#259EFF" mask="url(#mask-3)" cx="366" cy="17" r="83"></circle>
+                <circle id="椭圆形" fill-opacity="0.408216783" fill="#25A9FF" mask="url(#mask-3)" cx="136" cy="113.5" r="199"></circle>
+                <circle id="椭圆形备份-2" fill-opacity="0.110440341" fill="#5C54FF" mask="url(#mask-3)" cx="607.5" cy="207.5" r="117.5"></circle>
+            </g>
+            <rect id="矩形" x="473" y="350" width="188" height="52" rx="26"></rect>
+            <g id="编组-3备份" transform="translate(641.000000, 292.000000)">
+                <rect id="矩形" x="0" y="0" width="20" height="20"></rect>
+                <polyline id="路径-7备份" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(10.384615, 10.000000) scale(-1, 1) translate(-10.384615, -10.000000) " points="13.8461538 3.07692308 6.92307692 10 13.8461538 16.9230769"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

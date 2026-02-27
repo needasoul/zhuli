@@ -1,0 +1,228 @@
+ *,  
+ *::before,  
+ *::after {  
+   box-sizing: border-box;  
+   // touch-action: pan-y;  
+ }  
+ html {  
+   -webkit-text-size-adjust: 100%;  
+   -webkit-tap-highlight-color: transparent;  
+ }  
+
+ body {  
+   margin: 0;  
+   -webkit-overflow-scrolling: touch;  
+   background-color: #f5f5f5;  
+ }  
+
+ h1, h2, h3, h4, h5, h6, p, ul, ol, dl, input,  
+ button,  
+ select,  
+ optgroup,  
+ textarea{  
+    margin: 0;  
+    padding: 0;  
+ }  
+
+input,   
+textarea,   
+select,   
+button {   
+    font-size:14px ;   
+}
+button:active{
+	background: transparent;
+}
+.button-hover{
+    background: transparent; 
+}
+ i {  
+     font-style: normal;  
+ }  
+ ol,  
+ ul,  
+ dl {  
+   list-style: none;  
+ }  
+
+ a {  
+   text-decoration: none;  
+ }  
+
+ input {  
+  background: none;  
+  outline: none;  
+  border: 0px;  
+ }  
+image {
+	will-change: transform;
+
+
+}
+ img {  
+   vertical-align: middle;  
+   border-style: none;  
+ }  
+
+ a,  
+ area,  
+ button,  
+ label,  
+ select,  
+ textarea {  
+   -ms-touch-action: manipulation;  
+   touch-action: manipulation;  
+ }  
+
+ table {  
+   border-collapse: collapse;  
+ }  
+
+ label {  
+   display: inline-block;  
+ }  
+
+ button,  
+ html [type="button"],  
+ [type="reset"],  
+ [type="submit"] {  
+   -webkit-appearance: button;  
+ }
+ page{
+	 background: #F5F5F5 ;
+ }
+
+
+.flexc{
+	display: flex;
+	align-content: center;
+}
+.flex{
+	display: flex;
+}
+.flexs{
+	display: flex;
+	justify-content: space-between;
+}
+.flexw{
+	display: flex;
+	flex-wrap: wrap;
+}
+.me-text-beyond {
+	/*文本内容超宽度省略号显示 单行*/
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	// width: 100%;
+}
+
+.me-text-beyond-multi {
+	/*文本内容超宽度省略号显示 多行*/
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+// 字体
+.size10{
+	font-size: 20rpx;
+}
+.size12{
+	font-size: 24rpx;
+}
+
+.size14{
+	font-size: 28rpx;
+}
+
+.size16{
+	font-size: 32rpx;
+}
+
+.size18{
+	font-size: 36rpx;
+}
+
+.size24{
+	font-size: 48rpx;
+}
+
+
+// 字体颜色
+.hue{
+	color: #666666;
+}
+.hue1{
+	color: #b2b2b2;
+}
+
+.hue2{
+color:	#E1222A
+}
+.hue3{
+	color: #0083CD;
+}
+.hue4{
+	color:#353535;
+}
+.hue5{
+	color:#999999;
+}
+
+// 字体加粗
+
+.blod{
+	font-weight: bold;
+}
+
+//文字方向
+.text_center{
+	text-align: center;
+}
+.text_left{
+	text-align: left;
+}
+.text_right{
+	text-align: right;
+}
+
+// 图片大小
+.checkbox_img{
+	width: 40rpx;
+	height: 40rpx;
+	
+}
+
+.lineThrough{
+text-decoration: line-through;
+}
+
+// 边距
+
+.magLeft{
+	margin-left: 10rpx;
+}
+.pad24{
+	padding: 24rpx;
+	box-sizing: border-box;
+}
+
+
+.arrow_right_img{
+	width: 12rpx; height: 20rpx;margin-left: 10rpx;
+}
+
+
+.flexs-c{
+	display: flex;
+	align-content: center;
+	justify-content: center;
+}
+
+.flexColumn{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}

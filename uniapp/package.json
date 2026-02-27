@@ -1,0 +1,9 @@
+{
+	"dependencies": {
+		"@dcloudio/uni-ui": "^1.1.8",
+		"jweixin-module": "^1.6.0",
+		"lodash": "^4.17.15",
+		"moment": "^2.30.1",
+		"tki-qrcode": "^0.1.6"
+	}
+}
