@@ -37,28 +37,6 @@
 			}
 		},
 		{
-			"path": "pages/merchant/merchant",
-			"style": {
-				"navigationBarTitleText": "商家中心",
-				"enablePullDownRefresh": false
-					// #ifdef H5
-					,
-				"navigationStyle": "custom"
-				// #endif
-			}
-
-		},
-
-		{
-			"path": "pages/venueTab/venueTab",
-			"style": {
-				"navigationBarTitleText": "热门场馆",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
-			}
-
-		},
-		{
 			"path": "pages/paymentResults/paymentResults",
 			"style": {
 				"navigationBarTitleText": "支付结果",
@@ -87,9 +65,30 @@
 				"navigationBarTitleText": "活动详情",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path": "pages/boostSquare/boostSquare",
+			"style": {
+				"navigationBarTitleText": "助力广场",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/publishBoost/publishBoost",
+			"style": {
+				"navigationBarTitleText": "发布助力",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/boostDetail/boostDetail",
+			"style": {
+				"navigationBarTitleText": "助力详情",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
-	"subpackages": [{
+	"subPackages": [{
 			"root": "pagesA",
 			"pages": [{
 				"path": "setaddress/setaddress",
@@ -110,42 +109,6 @@
 				"style": {
 					"navigationBarTitleText": "我的优惠劵",
 					"enablePullDownRefresh": false
-						// #ifdef H5
-						,
-					"navigationStyle": "custom"
-					// #endif
-				}
-
-			}, {
-				"path": "makeAnAppointment/makeAnAppointment",
-				"style": {
-					"navigationBarTitleText": "订场预约",
-					"enablePullDownRefresh": false,
-					"navigationStyle": "custom"
-				}
-
-			}, {
-				"path": "quickBooking/quickBooking",
-				"style": {
-					"navigationBarTitleText": "热门场馆",
-					"enablePullDownRefresh": false
-				}
-			}, {
-				"path": "registrationaActivity/registrationaActivity",
-				"style": {
-					"navigationBarTitleText": "报名活动",
-					"enablePullDownRefresh": false,
-					"navigationStyle": "custom"
-				}
-			}, {
-				"path": "feedback/feedback",
-				"style": {
-					"navigationBarTitleText": "意见反馈",
-					"enablePullDownRefresh": false
-						// #ifdef H5
-						,
-					"navigationStyle": "custom"
-					// #endif
 				}
 
 			}, {
@@ -154,6 +117,13 @@
 					"navigationBarTitleText": "设置",
 					"enablePullDownRefresh": false,
 					"navigationStyle": "custom"
+				}
+
+			}, {
+				"path": "feedback/feedback",
+				"style": {
+					"navigationBarTitleText": "意见反馈",
+					"enablePullDownRefresh": false
 				}
 
 			}, {
@@ -176,22 +146,11 @@
 					"enablePullDownRefresh": false
 				}
 			}, {
-				"path": "venueVoucher/venueVoucher",
-				"style": {
-					"navigationBarTitleText": "入场凭证",
-					"enablePullDownRefresh": false
-				}
-
-			}, {
 				"path": "agreement/agreement",
 				"style": {
 					"navigationBarTitleText": "协议",
 					"enablePullDownRefresh": false,
 					"navigationStyle": "default"
-						// #ifdef H5
-						,
-					"navigationStyle": "custom"
-					// #endif
 				}
 
 			}, {
@@ -199,10 +158,30 @@
 				"style": {
 					"navigationBarTitleText": "领取优惠劵",
 					"enablePullDownRefresh": false
-						// #ifdef H5
-						,
-					"navigationStyle": "custom"
-					// #endif
+				}
+			}, {
+				"path": "taskCenter/taskCenter",
+				"style": {
+					"navigationBarTitleText": "任务中心",
+					"enablePullDownRefresh": false
+				}
+			}, {
+				"path": "taskAccepted/taskAccepted",
+				"style": {
+					"navigationBarTitleText": "已接任务",
+					"enablePullDownRefresh": false
+				}
+			}, {
+				"path": "taskPublished/taskPublished",
+				"style": {
+					"navigationBarTitleText": "已发布任务",
+					"enablePullDownRefresh": false
+				}
+			}, {
+				"path": "taskAudit/taskAudit",
+				"style": {
+					"navigationBarTitleText": "任务审核",
+					"enablePullDownRefresh": false
 				}
 			}]
 		},
@@ -239,10 +218,6 @@
 				"style": {
 					"navigationBarTitleText": "活动详情",
 					"enablePullDownRefresh": false
-						// #ifdef H5
-						,
-					"navigationStyle": "custom"
-					// #endif
 				}
 
 			}, {
@@ -250,14 +225,6 @@
 				"style": {
 					"navigationBarTitleText": "订单详情",
 					"enablePullDownRefresh": false
-				}
-
-			}, {
-				"path": "bookingAppointment/bookingAppointment",
-				"style": {
-					"navigationBarTitleText": "订场预约",
-					"enablePullDownRefresh": false,
-					"navigationStyle": "custom"
 				}
 
 			}, {
@@ -272,10 +239,6 @@
 				"style": {
 					"navigationBarTitleText": "确认订单",
 					"enablePullDownRefresh": false
-						// #ifdef H5
-						,
-					"navigationStyle": "custom"
-					// #endif
 				}
 
 			}, {
@@ -309,14 +272,6 @@
 					"path": "hotNews/hotNews",
 					"style": {
 						"navigationBarTitleText": "热门资讯",
-						"enablePullDownRefresh": false,
-						"navigationStyle": "custom"
-					}
-
-				}, {
-					"path": "placeDetails/placeDetails",
-					"style": {
-						"navigationBarTitleText": "场馆详情",
 						"enablePullDownRefresh": false,
 						"navigationStyle": "custom"
 					}
@@ -358,10 +313,6 @@
 					"style": {
 						"navigationBarTitleText": "资讯详情",
 						"enablePullDownRefresh": false
-							// #ifdef H5
-							,
-						"navigationStyle": "custom"
-						// #endif
 					}
 
 				}, {
@@ -369,10 +320,6 @@
 					"style": {
 						"navigationBarTitleText": "课程详情",
 						"enablePullDownRefresh": false
-							// #ifdef H5
-							,
-						"navigationStyle": "custom"
-						// #endif
 					}
 
 				},
@@ -380,13 +327,6 @@
 					"path": "financial/financial",
 					"style": {
 						"navigationBarTitleText": "资金明细",
-						"enablePullDownRefresh": false
-					}
-				},
-				{
-					"path": "businessOrder/businessOrder",
-					"style": {
-						"navigationBarTitleText": "场馆订单",
 						"enablePullDownRefresh": false
 					}
 				}
@@ -399,8 +339,7 @@
 		"navigationBarTitleText": "",
 		"navigationBarBackgroundColor": "#fff",
 		"backgroundColor": "#F8F8F8"
-	}
-	,
+	},
 	"tabBar": {
 		"borderStyle": "white",
 		"backgroundColor": "#fff",
@@ -411,7 +350,19 @@
 				"pagePath": "pages/index/index",
 				"iconPath": "static/tabbar/home.png",
 				"selectedIconPath": "static/tabbar/home_select.png",
-				"text": "活动"
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/order/order",
+				"iconPath": "static/tabbar/order.png",
+				"selectedIconPath": "static/tabbar/order_select.png",
+				"text": "订单"
+			},
+			{
+				"pagePath": "pages/publishBoost/publishBoost",
+				"iconPath": "static/tabbar/publish.png",
+				"selectedIconPath": "static/tabbar/publish_select.png",
+				"text": "发布"
 			},
 			{
 				"pagePath": "pages/me/me",

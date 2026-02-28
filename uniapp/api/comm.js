@@ -384,8 +384,9 @@ export function getOpenid(data) {
 		method: 'post',
 		data
 	})
-}
 
+
+}
 
 
 //记录请求
@@ -449,7 +450,6 @@ export function infodz(data) {
 }
 
 
-
 // 资讯点赞
 export function infocomment(data) {
 	return request({
@@ -500,11 +500,129 @@ export function rechargeList(data) {
 }
 
 
-
 //取消订单
 export function cancel(data) {
 	return request({
 		url: 'order/cancel',
+		method: 'post',
+		data
+	})
+}
+
+// ======================== 助力功能新增API ========================
+
+// 获取助力任务列表
+export function getBoostTasks(data) {
+	return request({
+		url: 'boost/tasks',
+		method: 'post',
+		data
+	})
+}
+
+// 获取助力任务详情
+export function getBoostTaskDetail(data) {
+	return request({
+		url: 'boost/taskDetail',
+		method: 'post',
+		data
+	})
+}
+
+// 发布助力任务
+export function publishBoostTask(data) {
+	return request({
+		url: 'boost/publish',
+		method: 'post',
+		data
+	})
+}
+
+// 参与助力任务
+export function joinBoostTask(data) {
+	return request({
+		url: 'boost/join',
+		method: 'post',
+		data
+	})
+}
+
+// 获取我的助力任务
+export function getMyBoostTasks(data) {
+	return request({
+		url: 'boost/myTasks',
+		method: 'post',
+		data
+	})
+}
+
+// 获取助力订单列表
+export function getBoostOrders(data) {
+	return request({
+		url: 'boost/orders',
+		method: 'post',
+		data
+	})
+}
+
+// 获取助力订单详情
+export function getBoostOrderDetail(data) {
+	return request({
+		url: 'boost/orderDetail',
+		method: 'post',
+		data
+	})
+}
+
+// 获取助力收益统计
+export function getBoostEarnings(data) {
+	return request({
+		url: 'boost/earnings',
+		method: 'post',
+		data
+	})
+}
+
+// 获取助力任务分类
+export function getBoostCategories(data) {
+	return request({
+		url: 'boost/categories',
+		method: 'post',
+		data
+	})
+}
+
+// 搜索助力任务
+export function searchBoostTasks(data) {
+	return request({
+		url: 'boost/search',
+		method: 'post',
+		data
+	})
+}
+
+// 获取助力任务进度
+export function getBoostProgress(data) {
+	return request({
+		url: 'boost/progress',
+		method: 'post',
+		data
+	})
+}
+
+// 评价助力任务
+export function rateBoostTask(data) {
+	return request({
+		url: 'boost/rate',
+		method: 'post',
+		data
+	})
+}
+
+// 获取助力任务统计数据
+export function getBoostStats(data) {
+	return request({
+		url: 'boost/stats',
 		method: 'post',
 		data
 	})
