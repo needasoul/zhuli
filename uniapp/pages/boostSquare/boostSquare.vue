@@ -37,8 +37,8 @@
 						<image :src="item.platformIcon" mode="aspectFit"></image>
 						<text class="platform-name">{{ item.platformName }}</text>
 					</view>
-					<view class="boost-status" :class="`status-${item.status}`">
-						{{ getStatusText(item.status) }}
+					<view class="boost-status" :class="item.statusClass">
+						{{ item.statusText }}
 					</view>
 				</view>
 				
@@ -175,11 +175,18 @@ export default {
 	methods: {
 		// 加载数据
 		loadData() {
+			const statusMap = {
+				'ongoing': { text: '进行中', class: 'status-ongoing' },
+				'popular': { text: '热门', class: 'status-popular' },
+				'new': { text: '新发布', class: 'status-new' },
+				'completed': { text: '已完成', class: 'status-completed' }
+			};
+			
 			// 模拟加载数据
-			this.boostList = [
+			const dataList = [
 				{
 					id: 1,
-					title: '【京东】618购物节助力',
+					title: '【京东】618 购物节助力',
 					description: '助力解锁大额优惠券，享受购物折扣，任务简单易完成',
 					price: '1.88',
 					status: 'ongoing',
@@ -191,12 +198,12 @@ export default {
 					tags: ['高收益', '易完成', '限时'],
 					authorAvatar: '../../static/images/avatar.png',
 					authorName: '张三',
-					createTime: '2小时前'
+					createTime: '2 小时前'
 				},
 				{
 					id: 2,
 					title: '【拼多多】砍价免费拿',
-					description: '帮我砍价到0元，即可免费获得商品，助力越多收益越大',
+					description: '帮我砍价到 0 元，即可免费获得商品，助力越多收益越大',
 					price: '2.50',
 					status: 'popular',
 					platformName: '拼多多',
@@ -207,11 +214,11 @@ export default {
 					tags: ['热门', '高返现'],
 					authorAvatar: '../../static/images/avatar.png',
 					authorName: '李四',
-					createTime: '1小时前'
+					createTime: '1 小时前'
 				},
 				{
 					id: 3,
-					title: '【淘宝】双11预售定金',
+					title: '【淘宝】双 11 预售定金',
 					description: '助力解锁预售优惠，享受定金膨胀，还有额外奖励',
 					price: '3.20',
 					status: 'new',
@@ -223,7 +230,7 @@ export default {
 					tags: ['新品', '高额奖励'],
 					authorAvatar: '../../static/images/avatar.png',
 					authorName: '王五',
-					createTime: '30分钟前'
+					createTime: '30 分钟前'
 				},
 				{
 					id: 4,
@@ -239,7 +246,7 @@ export default {
 					tags: ['直播', '互动'],
 					authorAvatar: '../../static/images/avatar.png',
 					authorName: '赵六',
-					createTime: '4小时前'
+					createTime: '4 小时前'
 				},
 				{
 					id: 5,
@@ -255,9 +262,19 @@ export default {
 					tags: ['涨粉', '真实'],
 					authorAvatar: '../../static/images/avatar.png',
 					authorName: '钱七',
-					createTime: '5小时前'
+					createTime: '5 小时前'
 				}
 			];
+			
+			// 添加状态文本和样式类
+			this.boostList = dataList.map(item => {
+				const statusInfo = statusMap[item.status] || { text: '', class: '' };
+				return {
+					...item,
+					statusText: statusInfo.text,
+					statusClass: statusInfo.class
+				};
+			});
 		},
 		
 		// 搜索
@@ -310,6 +327,13 @@ export default {
 			
 			this.loadStatus = 'loading';
 			
+			const statusMap = {
+				'ongoing': { text: '进行中', class: 'status-ongoing' },
+				'popular': { text: '热门', class: 'status-popular' },
+				'new': { text: '新发布', class: 'status-new' },
+				'completed': { text: '已完成', class: 'status-completed' }
+			};
+			
 			// 模拟加载更多数据
 			setTimeout(() => {
 				const moreData = [
@@ -331,20 +355,14 @@ export default {
 					}
 				];
 				
+				// 添加计算后的状态信息
+				const statusInfo = statusMap[moreData[0].status] || { text: '', class: '' };
+				moreData[0].statusText = statusInfo.text;
+				moreData[0].statusClass = statusInfo.class;
+				
 				this.boostList.push(...moreData);
 				this.loadStatus = this.boostList.length >= 20 ? 'nomore' : 'loadmore';
 			}, 1000);
-		},
-		
-		// 获取状态文本
-		getStatusText(status) {
-			const statusMap = {
-				'ongoing': '进行中',
-				'popular': '热门',
-				'new': '新发布',
-				'completed': '已完成'
-			};
-			return statusMap[status] || '';
 		},
 		
 		// 跳转到助力详情

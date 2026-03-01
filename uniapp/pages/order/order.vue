@@ -29,7 +29,7 @@
 				<view class="order-header">
 					<view class="order-info">
 						<view class="order-id">订单号：{{ order.orderId }}</view>
-						<view class="order-status" :class="`status-${order.status}`">{{ getStatusText(order.status) }}</view>
+						<view class="order-status" :class="order.statusClass">{{ order.statusText }}</view>
 					</view>
 					<view class="order-platform">
 						<image :src="order.platformIcon" mode="aspectFit"></image>
@@ -113,15 +113,22 @@ export default {
 	methods: {
 		// 加载数据
 		loadData() {
+			const statusMap = {
+				'pending_payment': { text: '待付款', class: 'status-pending' },
+				'in_progress': { text: '进行中', class: 'status-progress' },
+				'completed': { text: '已完成', class: 'status-completed' },
+				'cancelled': { text: '已取消', class: 'status-cancelled' }
+			};
+			
 			// 初始化示例订单数据
-			this.allOrders = [
+			const orders = [
 				{
 					id: 1,
 					orderId: 'ORD202311010001',
 					status: 'completed',
 					platformName: '京东',
 					platformIcon: '../../static/index/jd_icon.png',
-					taskTitle: '【京东】618购物节助力',
+					taskTitle: '【京东】618 购物节助力',
 					taskDesc: '助力解锁大额优惠券，享受购物折扣',
 					taskImage: '../../static/order/task_example1.jpg',
 					assistCount: 5,
@@ -136,7 +143,7 @@ export default {
 					platformName: '拼多多',
 					platformIcon: '../../static/index/pdd_icon.png',
 					taskTitle: '【拼多多】砍价免费拿',
-					taskDesc: '帮我砍价到0元，即可免费获得商品',
+					taskDesc: '帮我砍价到 0 元，即可免费获得商品',
 					taskImage: '../../static/order/task_example2.jpg',
 					assistCount: 10,
 					unitPrice: '2.50',
@@ -151,7 +158,7 @@ export default {
 					status: 'pending_payment',
 					platformName: '淘宝',
 					platformIcon: '../../static/index/taobao_icon.png',
-					taskTitle: '【淘宝】双11预售定金',
+					taskTitle: '【淘宝】双 11 预售定金',
 					taskDesc: '助力解锁预售优惠，享受定金膨胀',
 					taskImage: '../../static/order/task_example3.jpg',
 					assistCount: 8,
@@ -174,6 +181,16 @@ export default {
 					createTime: '2023-11-04 09:20'
 				}
 			];
+			
+			// 添加状态文本和样式类
+			this.allOrders = orders.map(order => {
+				const statusInfo = statusMap[order.status] || { text: '', class: '' };
+				return {
+					...order,
+					statusText: statusInfo.text,
+					statusClass: statusInfo.class
+				};
+			});
 			
 			// 计算各状态订单数量
 			this.calculateTabCounts();
@@ -237,17 +254,6 @@ export default {
 		// 切换标签页
 		switchTab(index) {
 			this.activeTab = index;
-		},
-		
-		// 获取状态文本
-		getStatusText(status) {
-			const statusMap = {
-				'pending_payment': '待付款',
-				'in_progress': '进行中',
-				'completed': '已完成',
-				'cancelled': '已取消'
-			};
-			return statusMap[status] || '';
 		},
 		
 		// 返回上一页

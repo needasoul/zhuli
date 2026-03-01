@@ -50,8 +50,8 @@
 							<image :src="item.platformIcon" mode="aspectFit"></image>
 							<text class="platform-name">{{ item.platformName }}</text>
 						</view>
-						<view class="boost-status" :class="`status-${item.status}`">
-							{{ getStatusText(item.status) }}
+						<view class="boost-status" :class="item.statusClass">
+							{{ item.statusText }}
 						</view>
 					</view>
 					
@@ -118,6 +118,13 @@
 import { getCommon } from "../../api/comm.js"
 export default {
 	data() {
+		const statusMap = {
+			'ongoing': { text: '进行中', class: 'status-ongoing' },
+			'popular': { text: '热门', class: 'status-popular' },
+			'new': { text: '新发布', class: 'status-new' },
+			'completed': { text: '已完成', class: 'status-completed' }
+		};
+		
 		return {
 			token: null,
 			user: {},
@@ -125,7 +132,7 @@ export default {
 			boostActivities: [
 				{
 					id: 1,
-					title: '【京东】618购物节助力',
+					title: '【京东】618 购物节助力',
 					description: '助力解锁大额优惠券，享受购物折扣',
 					price: '1.88',
 					status: 'ongoing',
@@ -133,23 +140,27 @@ export default {
 					platformIcon: '../../static/index/jd_icon.png',
 					total: 100,
 					completed: 65,
-					progress: 65
+					progress: 65,
+					statusText: '进行中',
+					statusClass: 'status-ongoing'
 				},
 				{
 					id: 2,
 					title: '【拼多多】砍价免费拿',
-					description: '帮我砍价到0元，即可免费获得商品',
+					description: '帮我砍价到 0 元，即可免费获得商品',
 					price: '2.50',
 					status: 'popular',
 					platformName: '拼多多',
 					platformIcon: '../../static/index/pdd_icon.png',
 					total: 50,
 					completed: 42,
-					progress: 84
+					progress: 84,
+					statusText: '热门',
+					statusClass: 'status-popular'
 				},
 				{
 					id: 3,
-					title: '【淘宝】双11预售定金',
+					title: '【淘宝】双 11 预售定金',
 					description: '助力解锁预售优惠，享受定金膨胀',
 					price: '3.20',
 					status: 'new',
@@ -157,7 +168,9 @@ export default {
 					platformIcon: '../../static/index/taobao_icon.png',
 					total: 80,
 					completed: 20,
-					progress: 25
+					progress: 25,
+					statusText: '新发布',
+					statusClass: 'status-new'
 				}
 			],
 			banners: [
@@ -213,17 +226,6 @@ export default {
 		// 获取用户信息
 		async getuser() {
 			// 实现获取用户信息逻辑
-		},
-		
-		// 获取状态文本
-		getStatusText(status) {
-			const statusMap = {
-				'ongoing': '进行中',
-				'popular': '热门',
-				'new': '新发布',
-				'completed': '已完成'
-			};
-			return statusMap[status] || '';
 		},
 		
 		// 跳转到助力详情
