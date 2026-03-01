@@ -359,12 +359,6 @@
 				"text": "订单"
 			},
 			{
-				"pagePath": "pages/publishBoost/publishBoost",
-				"iconPath": "static/tabbar/publish.png",
-				"selectedIconPath": "static/tabbar/publish_select.png",
-				"text": "发布"
-			},
-			{
 				"pagePath": "pages/me/me",
 				"iconPath": "static/tabbar/me.png",
 				"selectedIconPath": "static/tabbar/me_select.png",
