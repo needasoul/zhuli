@@ -1,11 +1,11 @@
 {
     "name" : "changguangGaoJi",
-    "appid" : "",
+    "appid" : "__UNI__616AF14",
     "description" : "",
     "versionName" : "1.3.1",
     "versionCode" : "100",
     "transformPx" : false,
-	"sassImplementationName" : "node-sass",
+    "sassImplementationName" : "node-sass",
     /* 5+App特有相关 */
     "app-plus" : {
         "usingComponents" : true,

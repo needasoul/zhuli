@@ -105,37 +105,6 @@
 				</view>
 			</view>
 		</view>
-
-		<!-- 快速入口 -->
-		<view class="quick-access">
-			<view class="access-title">快捷入口</view>
-			<view class="access-grid">
-				<view class="access-item" @click="goToBoostSquare">
-					<view class="access-icon">
-						<u-icon name="grid" color="#49AFFF" size="24"></u-icon>
-					</view>
-					<view class="access-text">助力广场</view>
-				</view>
-				<view class="access-item" @click="goToPublishBoost">
-					<view class="access-icon">
-						<u-icon name="plus-circle" color="#FF5722" size="24"></u-icon>
-					</view>
-					<view class="access-text">发布助力</view>
-				</view>
-				<view class="access-item" @click="goToHistory">
-					<view class="access-icon">
-						<u-icon name="clock" color="#9C27B0" size="24"></u-icon>
-					</view>
-					<view class="access-text">历史记录</view>
-				</view>
-				<view class="access-item" @click="goToCustomerService">
-					<view class="access-icon">
-						<u-icon name="chat" color="#4CAF50" size="24"></u-icon>
-					</view>
-					<view class="access-text">客服</view>
-				</view>
-			</view>
-		</view>
 	</view>
 </template>
 
@@ -245,34 +214,6 @@ export default {
 						icon: 'none'
 					});
 				}
-			});
-		},
-		
-		// 前往助力广场
-		goToBoostSquare() {
-			uni.switchTab({
-				url: '/pages/boostSquare/boostSquare'
-			});
-		},
-		
-		// 前往发布助力
-		goToPublishBoost() {
-			uni.navigateTo({
-				url: '/pages/publishBoost/publishBoost'
-			});
-		},
-		
-		// 前往历史记录
-		goToHistory() {
-			uni.navigateTo({
-				url: '/pages/me/history'
-			});
-		},
-		
-		// 前往客服
-		goToCustomerService() {
-			uni.navigateTo({
-				url: '/pages/me/customerService'
 			});
 		}
 	}
@@ -472,49 +413,6 @@ export default {
 			padding: 15rpx 30rpx;
 			font-size: 26rpx;
 			font-weight: bold;
-		}
-	}
-}
-
-.quick-access {
-	background: white;
-	margin: 0 30rpx 30rpx;
-	border-radius: 20rpx;
-	padding: 30rpx;
-	box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.1);
-	
-	.access-title {
-		font-size: 30rpx;
-		font-weight: bold;
-		color: #333;
-		margin-bottom: 20rpx;
-	}
-	
-	.access-grid {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		gap: 20rpx;
-		
-		.access-item {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			
-			.access-icon {
-				width: 70rpx;
-				height: 70rpx;
-				background: #f5f5f5;
-				border-radius: 50%;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				margin-bottom: 10rpx;
-			}
-			
-			.access-text {
-				font-size: 22rpx;
-				color: #666;
-			}
 		}
 	}
 }

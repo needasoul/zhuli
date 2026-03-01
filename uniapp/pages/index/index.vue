@@ -29,28 +29,8 @@
 			<!-- 搜索框 -->
 			<view class="search_box zindex flexc">
 				<image src="@/static/index/icon3.png" mode=""></image>
-				<input disabled="true" placeholder-style='color:#DAD8DB;' type="text" placeholder="搜索助力活动" />
+				<input type="text" placeholder="搜索助力活动" />
 			</view>
-		</view>
-
-		<!-- 助力活动分类 -->
-		<view class="boost-types zindex">
-			<scroll-view scroll-x="true" style="width:100%;white-space: nowrap;">
-				<view class="d-flex ml-26">
-					<view class="boost-type-item txt-center pt-10 br-36 mr-32" 
-						v-for="(item,index) in boostTypes" 
-						:key="item.id" 
-						:class="{active: activeBoostType===item.id}"
-						@click="selectBoostType(item.id)">
-						<view class="boost-type-icon">
-							<image :src="item.icon" mode=""></image>
-						</view>
-						<view class="boost-type-name f-size-26 f-600 color-0E11 mt-12">
-							{{item.name}}
-						</view>
-					</view>
-				</view>
-			</scroll-view>
 		</view>
 
 		<!-- 助力活动列表 -->
@@ -142,15 +122,6 @@ export default {
 			token: null,
 			user: {},
 			common: {},
-			boostTypes: [
-				{ id: 1, name: '京东助力', icon: '../../static/index/jd_icon.png' },
-				{ id: 2, name: '拼多多助力', icon: '../../static/index/pdd_icon.png' },
-				{ id: 3, name: '淘宝助力', icon: '../../static/index/taobao_icon.png' },
-				{ id: 4, name: '抖音助力', icon: '../../static/index/douyin_icon.png' },
-				{ id: 5, name: '快手助力', icon: '../../static/index/kuaishou_icon.png' },
-				{ id: 6, name: '其他助力', icon: '../../static/index/other_icon.png' }
-			],
-			activeBoostType: 1,
 			boostActivities: [
 				{
 					id: 1,
@@ -242,19 +213,6 @@ export default {
 		// 获取用户信息
 		async getuser() {
 			// 实现获取用户信息逻辑
-		},
-		
-		// 选择助力类型
-		selectBoostType(typeId) {
-			this.activeBoostType = typeId;
-			// 这里可以触发获取特定类型助力活动的逻辑
-			this.loadBoostActivitiesByType(typeId);
-		},
-		
-		// 根据类型加载助力活动
-		loadBoostActivitiesByType(typeId) {
-			// 模拟根据不同类型加载不同活动
-			console.log(`加载类型 ${typeId} 的助力活动`);
 		},
 		
 		// 获取状态文本
@@ -372,40 +330,6 @@ page {
 	}
 }
 
-.boost-types {
-	margin: 10rpx 0;
-	padding: 15rpx 0;
-	background: white;
-}
-
-.boost-type-item {
-	display: inline-block;
-	padding: 8rpx 16rpx;
-	border-radius: 36rpx;
-	margin-right: 16rpx;
-	
-	&.active {
-		background: #49AFFF;
-		color: white;
-		
-		.boost-type-name {
-			color: white;
-		}
-	}
-	
-	.boost-type-icon {
-		image {
-			width: 40rpx;
-			height: 40rpx;
-		}
-	}
-	
-	.boost-type-name {
-		font-size: 24rpx;
-		color: #333;
-	}
-}
-
 .boost-list-container {
 	padding: 15rpx;
 }
@@ -415,13 +339,13 @@ page {
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 15rpx;
-	
+
 	.header-title {
 		font-size: 28rpx;
 		font-weight: bold;
 		color: #333;
 	}
-	
+
 	.header-more {
 		font-size: 22rpx;
 		color: #666;
@@ -544,7 +468,7 @@ page {
 
 .banner-section {
 	padding: 0 15rpx 15rpx;
-	
+
 	.banner-swiper {
 		height: 180rpx;
 		border-radius: 12rpx;
@@ -559,14 +483,14 @@ page {
 
 .quick-publish-section {
 	padding: 0 15rpx 15rpx;
-	
+
 	.section-title {
 		font-size: 28rpx;
 		font-weight: bold;
 		color: #333;
 		margin-bottom: 12rpx;
 	}
-	
+
 	.publish-card {
 		padding: 20rpx;
 		display: flex;
@@ -618,7 +542,7 @@ page {
 	background: #FFF9C4;
 	border-radius: 8rpx;
 	margin: 0 15rpx 15rpx;
-	
+
 	.tips-icon {
 		width: 32rpx;
 		height: 32rpx;
@@ -629,7 +553,7 @@ page {
 			height: 100%;
 		}
 	}
-	
+
 	.tips-text {
 		font-size: 22rpx;
 		color: #FF8F00;
