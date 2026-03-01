@@ -7,14 +7,12 @@
 			<!-- #endif -->
 		</view>
 		<view class="content zindex">
-			<view class="avatar-box" style="position: relative; display: flex; justify-content: center; margin-top: 20rpx;">
+			<view class="page-title">个人资料修改</view>
+			<view class="avatar-box" style="position: relative; display: flex; justify-content: center; margin: 30rpx auto;">
 				<button class="avatar-button" size='mini' open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
-					<image class="user_class_2_img" :src="imgall || '/static/default-avatar.png'" mode="aspectFill" />
+					<image class="user_class_2_img" :src="imgall ? imgall : defaultAvatar" mode="aspectFill" />
 				</button>
 				<image class="editImg" src="../static/icon9.png" mode=""></image>
-			</view>
-			<view class="content_1">
-				个人信息
 			</view>
 			<view class="user_class">
 				<view class="user_class_1">
@@ -98,6 +96,8 @@
 				int: {},
 				// 用户上传的头像
 				imgall: '',
+				// 默认头像
+				defaultAvatar: '/static/images/avatar.png',
 				// 名字
 				user_name: '',
 				// 邮箱
@@ -236,6 +236,12 @@
 				} else {
 					return this.showToast('请填写出生日期')
 				}
+				if (!this.file) {
+					return this.showToast('请先上传头像')
+				}
+				if (!this.user_name) {
+					return this.showToast('请填写昵称')
+				}
 				uni.showLoading({
 					title: '保存中...'
 				})
@@ -245,6 +251,7 @@
 					birthday: this.mailbox,
 					mobile: this.cell2
 				}).then(res => {
+					console.log('保存结果:', res)
 					uni.hideLoading()
 					if (res.code == 1) {
 						this.showToast('保存成功')
@@ -252,11 +259,12 @@
 							uni.navigateBack()
 						}, 500)
 					} else {
-						this.showToast(res.msg || '修改失败')
+						this.showToast(res.msg || '保存失败：' + (res.code || '未知错误'))
 					}
 				}).catch(err => {
+					console.log('保存错误:', err)
 					uni.hideLoading()
-					this.showToast('保存失败')
+					this.showToast('保存失败：网络错误')
 				})
 
 			},
@@ -319,15 +327,30 @@
 				})
 			},
 			onChooseAvatar(e) {
-				console.log(e.detail.avatarUrl, '获取头像成功')
-				this.imgall = e.detail.avatarUrl
-				this.up()
+				console.log('头像 URL:', e.detail.avatarUrl)
+				if (e.detail.avatarUrl) {
+					this.imgall = e.detail.avatarUrl
+					this.up()
+				} else {
+					this.showToast('选择头像失败')
+				}
 			},
 			up() {
-				console.log('this.image', this.imgall);
+				console.log('上传头像:', this.imgall);
+				if (!this.imgall) {
+					this.showToast('请先选择头像')
+					return
+				}
 				let token = wx.getStorageSync('userinfo')
+				if (!token) {
+					this.showToast('请先登录')
+					return
+				}
 				token = token.token
 				let that = this
+				uni.showLoading({
+					title: '上传中...'
+				})
 				uni.uploadFile({
 					filePath: this.imgall,
 					name: 'file',
@@ -336,18 +359,24 @@
 					},
 					url: config.uploadImgUrl + '/api/common/upload',
 					success(res) {
-						let img = JSON.parse(res.data)
-						if (img.code == 1) {
-							console.log(img.data.fullurl);
-							that.imgall = img.data.fullurl
-							that.file = img.data.url
-						} else {
+						uni.hideLoading()
+						console.log('上传结果:', res.data)
+						try {
+							let img = JSON.parse(res.data)
+							if (img.code == 1) {
+								that.imgall = img.data.fullurl
+								that.file = img.data.url
+								that.showToast('头像上传成功')
+							} else {
+								that.showToast(img.msg || '上传失败')
+							}
+						} catch (e) {
 							that.showToast('上传失败')
 						}
-
 					},
 					fail(res) {
-						console.log(res, '====>>><<<');
+						uni.hideLoading()
+						console.log('上传失败:', res)
 						that.showToast('上传失败')
 					}
 				})
@@ -369,7 +398,7 @@
 		position: relative;
 		display: flex;
 		justify-content: center;
-		margin-top: 20rpx;
+		margin: 30rpx auto;
 	}
 	
 	.avatar-button {
@@ -383,6 +412,14 @@
 	
 	.avatar-button::after {
 		border: none;
+	}
+	
+	.page-title {
+		text-align: center;
+		font-size: 32rpx;
+		font-weight: 600;
+		color: #333;
+		margin: 40rpx 0 20rpx;
 	}
 	
 	.editImg {
