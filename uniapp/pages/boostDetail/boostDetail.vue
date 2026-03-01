@@ -1,16 +1,16 @@
 <template>
 	<view class="boost-detail-container">
-		<!-- 顶部返回按钮 -->
+		<!-- 顶部导航栏 -->
 		<view class="top-bar">
 			<view class="back-btn" @click="goBack">
-				<u-icon name="arrow-left" size="20" color="#fff"></u-icon>
+				<u-icon name="arrow-left" color="#fff" size="20"></u-icon>
 			</view>
-			<view class="share-btn" @click="showShareSheet = true">
-				<u-icon name="share" size="20" color="#fff"></u-icon>
+			<view class="share-btn" @click="shareTask">
+				<u-icon name="share" color="#fff" size="20"></u-icon>
 			</view>
 		</view>
 
-		<!-- 任务基础信息 -->
+		<!-- 基本信息区域 -->
 		<view class="basic-info-section">
 			<view class="platform-info">
 				<image :src="boostDetail.platformIcon" mode="aspectFit"></image>
@@ -20,15 +20,16 @@
 			<view class="boost-description">{{ boostDetail.description }}</view>
 		</view>
 
-		<!-- 价格和进度 -->
+		<!-- 价格和进度区域 -->
 		<view class="price-progress-section">
 			<view class="price-info">
 				<view class="price">
 					<text class="unit">¥</text>
 					<text class="amount">{{ boostDetail.price }}</text>
 				</view>
-				<view class="price-label">单次助力</view>
+				<view class="price-label">单价</view>
 			</view>
+			
 			<view class="progress-info">
 				<view class="progress-bar">
 					<view class="progress-fill" :style="{ width: boostDetail.progress + '%' }"></view>
@@ -37,165 +38,107 @@
 			</view>
 		</view>
 
-		<!-- 任务详情卡片 -->
-		<view class="detail-card">
-			<view class="card-header">
-				<view class="card-title">任务详情</view>
+		<!-- 任务详情 -->
+		<view class="task-details-section">
+			<view class="section-title">任务详情</view>
+			<view class="detail-item">
+				<view class="detail-label">任务链接</view>
+				<view class="detail-value link" @click="copyLink">{{ boostDetail.link }}</view>
 			</view>
-			<view class="card-content">
-				<view class="detail-item">
-					<view class="detail-label">任务类型</view>
-					<view class="detail-value">{{ boostDetail.platformName }}助力</view>
-				</view>
-				<view class="detail-item">
-					<view class="detail-label">助力单价</view>
-					<view class="detail-value">¥{{ boostDetail.price }}</view>
-				</view>
-				<view class="detail-item">
-					<view class="detail-label">总需助力</view>
-					<view class="detail-value">{{ boostDetail.total }}次</view>
-				</view>
-				<view class="detail-item">
-					<view class="detail-label">已获助力</view>
-					<view class="detail-value">{{ boostDetail.completed }}次</view>
-				</view>
-				<view class="detail-item">
-					<view class="detail-label">剩余助力</view>
-					<view class="detail-value">{{ boostDetail.total - boostDetail.completed }}次</view>
-				</view>
-				<view class="detail-item">
-					<view class="detail-label">任务状态</view>
-					<view class="detail-value status" :class="statusClass">
-						{{ statusText }}
-					</view>
+			<view class="detail-item">
+				<view class="detail-label">状态</view>
+				<view class="detail-value status" :class="statusClass">
+					{{ statusText }}
 				</view>
 			</view>
-		</view>
-
-		<!-- 助力链接 -->
-		<view class="link-card" v-if="boostDetail.link">
-			<view class="card-header">
-				<view class="card-title">助力链接</view>
-			</view>
-			<view class="link-content">
-				<view class="link-url">{{ boostDetail.link }}</view>
-				<button class="copy-btn" @click="copyLink">复制链接</button>
-			</view>
-		</view>
-
-		<!-- 注意事项 -->
-		<view class="notes-card" v-if="boostDetail.notes">
-			<view class="card-header">
-				<view class="card-title">注意事项</view>
-			</view>
-			 <view class="notes-content">
-				<view class="note-item" v-for="(note, index) in boostDetail.notes.split('\n')" :key="index" v-if="note.trim()">
-					<u-icon name="checkmark" size="14" color="#4CAF50"></u-icon>
-					<text class="note-text">{{ note }}</text>
-				</view>
+			<view class="detail-item">
+				<view class="detail-label">任务说明</view>
+				<view class="detail-value notes">{{ boostDetail.notes }}</view>
 			</view>
 		</view>
 
 		<!-- 发布者信息 -->
-		<view class="publisher-card">
-			<view class="card-header">
-				<view class="card-title">发布者信息</view>
-			</view>
-			<view class="publisher-content">
-				<view class="publisher-info">
-					<image :src="boostDetail.authorAvatar" mode="aspectFill"></image>
-					<view class="publisher-details">
-						<view class="publisher-name">{{ boostDetail.authorName }}</view>
-						<view class="publisher-stats">
-							<view class="stat-item">
-								<text class="stat-value">{{ boostDetail.authorStats.tasks }}</text>
-								<text class="stat-label">发布任务</text>
-							</view>
-							<view class="stat-item">
-								<text class="stat-value">{{ boostDetail.authorStats.success }}</text>
-								<text class="stat-label">成功完成</text>
-							</view>
-							<view class="stat-item">
-								<text class="stat-value">{{ boostDetail.authorStats.rating }}%</text>
-								<text class="stat-label">好评率</text>
-							</view>
-						</view>
+		<view class="publisher-info-section">
+			<view class="section-title">发布者信息</view>
+			<view class="publisher-card">
+				<image class="publisher-avatar" :src="boostDetail.authorAvatar" mode="aspectFill"></image>
+				<view class="publisher-details">
+					<view class="publisher-name">{{ boostDetail.authorName }}</view>
+					<view class="publisher-stats">
+						<text>发布任务：{{ boostDetail.authorStats.tasks }}</text>
+						<text>成功率：{{ boostDetail.authorStats.success }}%</text>
+						<text>好评率：{{ boostDetail.authorStats.rating }}%</text>
 					</view>
 				</view>
-				<button class="contact-btn" @click="contactPublisher">联系发布者</button>
-			</view>
-		</view>
-
-		<!-- 保障服务 -->
-		<view class="guarantee-card">
-			<view class="card-header">
-				<view class="card-title">服务保障</view>
-			</view>
-			<view class="guarantee-content">
-				<view class="guarantee-item">
-					<u-icon name="shield-checkmark" size="20" color="#4CAF50"></u-icon>
-					<view class="guarantee-text">平台担保交易，安全可靠</view>
-				</view>
-				<view class="guarantee-item">
-					<u-icon name="time" size="20" color="#2196F3"></u-icon>
-					<view class="guarantee-text">按时完成，超时自动退款</view>
-				</view>
-				<view class="guarantee-item">
-					<u-icon name="person" size="20" color="#FF9800"></u-icon>
-					<view class="guarantee-text">专业客服，全程跟进服务</view>
+				<view class="contact-btn" @click="contactPublisher">
+					<u-icon name="chat" color="#49AFFF" size="24"></u-icon>
 				</view>
 			</view>
 		</view>
 
 		<!-- 底部操作栏 -->
-		<view class="bottom-action-bar">
-			<view class="action-item" @click="collectTask">
-				<u-icon :name="isCollected ? 'star-fill' : 'star'" :color="isCollected ? '#FFC107' : '#999'" size="20"></u-icon>
-				<text :style="{ color: isCollected ? '#FFC107' : '#999' }">收藏</text>
+		<view class="bottom-actions">
+			<view class="action-btn collect" @click="collectTask">
+				<u-icon :name="isCollected ? 'star-fill' : 'star'" :color="isCollected ? '#FFD700' : '#666'" size="20"></u-icon>
+				<text>{{ isCollected ? '已收藏' : '收藏' }}</text>
 			</view>
-			<view class="action-item" @click="shareTask">
-				<u-icon name="share" color="#999" size="20"></u-icon>
+			<view class="action-btn share" @click="shareTask">
+				<u-icon name="share" color="#666" size="20"></u-icon>
 				<text>分享</text>
 			</view>
-			<button class="assist-btn" @click="assistTask">立即助力</button>
+			<view class="action-btn assist primary" @click="assistTask">
+				立即助力
+			</view>
 		</view>
 
-		<!-- 分享面板 -->
-		<u-action-sheet :list="shareOptions" :show="showShareSheet" @close="showShareSheet = false" @click="handleShareOption"></u-action-sheet>
-
-		<!-- 助力确认弹窗 -->
-		<u-popup :show="showAssistConfirm" mode="center" :round="10" :closeable="true" @close="showAssistConfirm = false">
-			<view class="confirm-popup">
-				<view class="popup-title">确认助力</view>
-				<view class="popup-content">
-					<view class="confirm-info">
-						<view class="info-row">
-							<text class="label">任务名称：</text>
-							<text class="value">{{ boostDetail.title }}</text>
+		<!-- 分享弹窗 -->
+		<u-popup :show="showShareSheet" @close="showShareSheet = false" mode="bottom">
+			<view class="share-popup">
+				<view class="popup-header">
+					<text>分享任务</text>
+					<u-icon name="close" @click="showShareSheet = false"></u-icon>
+				</view>
+				<view class="share-options">
+					<view class="share-option" v-for="(option, index) in shareOptions" :key="index" @click="handleShareOption(index)">
+						<view class="share-icon">
+							<u-icon :name="option.icon" color="#49AFFF" size="24"></u-icon>
 						</view>
-						<view class="info-row">
-							<text class="label">助力价格：</text>
-							<text class="value price">¥{{ boostDetail.price }}</text>
-						</view>
-						<view class="info-row">
-							<text class="label">助力次数：</text>
-							<text class="value">{{ assistCount }}次</text>
-						</view>
-						<view class="info-row">
-							<text class="label">总计费用：</text>
-							<text class="value price">¥{{ totalAssistCost }}</text>
-						</view>
-					</view>
-					<view class="count-selector">
-						<view class="selector-label">助力次数</view>
-						<view class="counter">
-							<button class="counter-btn" :disabled="assistCount <= 1" @click="decreaseCount">-</button>
-							<input class="counter-input" type="number" v-model="assistCount" />
-							<button class="counter-btn" @click="increaseCount">+</button>
-						</view>
+						<text class="share-name">{{ option.name }}</text>
 					</view>
 				</view>
-				<view class="popup-actions">
+			</view>
+		</u-popup>
+
+		<!-- 助力确认弹窗 -->
+		<u-popup :show="showAssistConfirm" @close="showAssistConfirm = false" mode="bottom">
+			<view class="assist-popup">
+				<view class="popup-header">
+					<text>确认助力</text>
+					<u-icon name="close" @click="showAssistConfirm = false"></u-icon>
+				</view>
+				<view class="assist-content">
+					<view class="assist-info">
+						<view class="task-title">{{ boostDetail.title }}</view>
+						<view class="task-price">¥{{ boostDetail.price }}/次</view>
+					</view>
+					<view class="assist-count">
+						<view class="count-label">助力次数</view>
+						<view class="count-controls">
+							<view class="count-btn" @click="decreaseCount">
+								<u-icon name="minus" color="#666" size="16"></u-icon>
+							</view>
+							<text class="count-value">{{ assistCount }}</text>
+							<view class="count-btn" @click="increaseCount">
+								<u-icon name="plus" color="#666" size="16"></u-icon>
+							</view>
+						</view>
+					</view>
+					<view class="total-cost">
+						<view class="cost-label">总计费用</view>
+						<view class="cost-value">¥{{ totalAssistCost }}</view>
+					</view>
+				</view>
+				<view class="popup-footer">
 					<button class="cancel-btn" @click="showAssistConfirm = false">取消</button>
 					<button class="confirm-btn" @click="confirmAssist">确认助力</button>
 				</view>
@@ -229,27 +172,7 @@ export default {
 					rating: 98
 				}
 			},
-			showShareSheet: false,
-			showAssistConfirm: false,
-			assistCount: 1,
-			totalAssistCost: 1.88
-		};
-	},
-	computed: {
-		statusClass() {
-			return `status-${this.boostDetail.status}`;
-		},
-		statusText() {
-			const statusMap = {
-				'ongoing': '进行中',
-				'popular': '热门',
-				'new': '新发布',
-				'completed': '已完成'
-			};
-			return statusMap[this.boostDetail.status] || '';
-		},
-		
-		isCollected: false,
+			isCollected: false,
 			showShareSheet: false,
 			showAssistConfirm: false,
 			assistCount: 1,
@@ -500,151 +423,138 @@ export default {
 			.price-label {
 				font-size: 24rpx;
 				color: #999;
+				margin-top: 5rpx;
 			}
 		}
 		
 		.progress-info {
 			flex: 1;
-			margin-left: 30rpx;
+			margin-left: 40rpx;
 			
 			.progress-bar {
 				width: 100%;
-				height: 12rpx;
-				background: #E0E0E0;
-				border-radius: 6rpx;
-				overflow: hidden;
+				height: 8rpx;
+				background: #f0f0f0;
+				border-radius: 4rpx;
 				margin-bottom: 10rpx;
 				
 				.progress-fill {
 					height: 100%;
-					background: linear-gradient(to right, #4CAF50, #8BC34A);
-					border-radius: 6rpx;
+					background: linear-gradient(90deg, #49AFFF, #6a5af9);
+					border-radius: 4rpx;
+					transition: width 0.3s ease;
 				}
 			}
 			
 			.progress-text {
 				font-size: 24rpx;
-				color: #999;
-				text-align: right;
+				color: #666;
+				text-align: center;
 			}
 		}
 	}
 	
-	.detail-card, .link-card, .notes-card, .publisher-card, .guarantee-card {
+	.task-details-section {
 		background: white;
-		border-radius: 15rpx;
+		padding: 30rpx;
 		margin: 0 20rpx 20rpx;
-		overflow: hidden;
+		border-radius: 15rpx;
 		
-		.card-header {
-			padding: 25rpx 30rpx 20rpx;
-			border-bottom: 1rpx solid #eee;
-			
-			.card-title {
-				font-size: 30rpx;
-				font-weight: bold;
-				color: #333;
-			}
+		.section-title {
+			font-size: 32rpx;
+			font-weight: bold;
+			margin-bottom: 20rpx;
+			color: #333;
 		}
 		
-		.card-content {
-			padding: 20rpx 30rpx;
+		.detail-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			padding: 20rpx 0;
+			border-bottom: 1rpx solid #f0f0f0;
 			
-			.detail-item {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				padding: 15rpx 0;
+			&:last-child {
+				border-bottom: none;
+			}
+			
+			.detail-label {
+				font-size: 28rpx;
+				color: #666;
+				width: 120rpx;
+				flex-shrink: 0;
+			}
+			
+			.detail-value {
+				font-size: 28rpx;
+				color: #333;
+				flex: 1;
+				margin-left: 20rpx;
+				text-align: right;
 				
-				.detail-label {
-					font-size: 26rpx;
-					color: #666;
-					width: 120rpx;
+				&.link {
+					color: #49AFFF;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
 				}
 				
-				.detail-value {
-					font-size: 26rpx;
-					color: #333;
-					flex: 1;
-					text-align: right;
+				&.status {
+					padding: 4rpx 12rpx;
+					border-radius: 12rpx;
+					font-size: 24rpx;
 					
-					&.status {
-						padding: 5rpx 15rpx;
-						border-radius: 20rpx;
-						font-size: 22rpx;
-						color: white;
-						
-						&.status-ongoing {
-							background: #4CAF50;
-						}
-						
-						&.status-popular {
-							background: #FF9800;
-						}
-						
-						&.status-new {
-							background: #2196F3;
-						}
-						
-						&.status-completed {
-							background: #9E9E9E;
-						}
+					&.status-ongoing {
+						background: #e3f2fd;
+						color: #2196f3;
+					}
+					
+					&.status-popular {
+						background: #fff3e0;
+						color: #ff9800;
+					}
+					
+					&.status-new {
+						background: #e8f5e8;
+						color: #4caf50;
+					}
+					
+					&.status-completed {
+						background: #f5f5f5;
+						color: #999;
 					}
 				}
+				
+				&.notes {
+					text-align: left;
+					white-space: pre-line;
+					line-height: 1.6;
+				}
 			}
 		}
 	}
 	
-	.link-content {
-		padding: 20rpx 30rpx;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+	.publisher-info-section {
+		background: white;
+		padding: 30rpx;
+		margin: 0 20rpx 20rpx;
+		border-radius: 15rpx;
 		
-		.link-url {
-			flex: 1;
-			font-size: 24rpx;
-			color: #666;
-			word-break: break-all;
-			margin-right: 20rpx;
+		.section-title {
+			font-size: 32rpx;
+			font-weight: bold;
+			margin-bottom: 20rpx;
+			color: #333;
 		}
 		
-		.copy-btn {
-			background: #49AFFF;
-			color: white;
-			font-size: 24rpx;
-			padding: 10rpx 20rpx;
-			border-radius: 10rpx;
-		}
-	}
-	
-	.notes-content {
-		padding: 20rpx 30rpx;
-		
-		.note-item {
-			display: flex;
-			align-items: flex-start;
-			margin-bottom: 15rpx;
-			
-			.note-text {
-				font-size: 26rpx;
-				color: #666;
-				margin-left: 10rpx;
-				flex: 1;
-				line-height: 1.5;
-			}
-		}
-	}
-	
-	.publisher-content {
-		padding: 20rpx 30rpx;
-		
-		.publisher-info {
+		.publisher-card {
 			display: flex;
 			align-items: center;
-			margin-bottom: 20rpx;
+			padding: 20rpx;
+			background: #f8f9fa;
+			border-radius: 12rpx;
 			
-			image {
+			.publisher-avatar {
 				width: 80rpx;
 				height: 80rpx;
 				border-radius: 50%;
@@ -658,189 +568,235 @@ export default {
 					font-size: 28rpx;
 					font-weight: bold;
 					color: #333;
-					margin-bottom: 10rpx;
+					margin-bottom: 8rpx;
 				}
 				
 				.publisher-stats {
 					display: flex;
-					justify-content: space-around;
+					font-size: 24rpx;
+					color: #666;
 					
-					.stat-item {
-						text-align: center;
-						
-						.stat-value {
-							font-size: 28rpx;
-							font-weight: bold;
-							color: #49AFFF;
-							display: block;
-						}
-						
-						.stat-label {
-							font-size: 22rpx;
-							color: #999;
-						}
+					text {
+						margin-right: 20rpx;
 					}
 				}
 			}
-		}
-		
-		.contact-btn {
-			background: #49AFFF;
-			color: white;
-			border-radius: 10rpx;
-			padding: 15rpx;
-			font-size: 26rpx;
-		}
-	}
-	
-	.guarantee-content {
-		padding: 20rpx 30rpx;
-		
-		.guarantee-item {
-			display: flex;
-			align-items: center;
-			margin-bottom: 20rpx;
 			
-			.guarantee-text {
-				font-size: 26rpx;
-				color: #666;
-				margin-left: 15rpx;
-				flex: 1;
+			.contact-btn {
+				padding: 10rpx;
+				border-radius: 50%;
+				background: white;
 			}
 		}
 	}
 	
-	.bottom-action-bar {
+	.bottom-actions {
 		position: fixed;
 		bottom: 0;
 		left: 0;
 		right: 0;
-		background: white;
-		padding: 20rpx 30rpx;
 		display: flex;
 		align-items: center;
-		border-top: 1rpx solid #eee;
+		background: white;
+		padding: 20rpx 30rpx;
+		border-top: 1rpx solid #f0f0f0;
+		z-index: 100;
 		
-		.action-item {
-			flex: 1;
+		.action-btn {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			justify-content: center;
+			padding: 10rpx 20rpx;
+			margin-right: 20rpx;
 			
 			text {
 				font-size: 24rpx;
-				color: #999;
-				margin-top: 5rpx;
+				color: #666;
+				margin-top: 4rpx;
 			}
-		}
-		
-		.assist-btn {
-			flex: 2;
-			background: #FF5722;
-			color: white;
-			border-radius: 50rpx;
-			padding: 25rpx;
-			font-size: 30rpx;
-			font-weight: bold;
+			
+			&.collect {
+				margin-right: 30rpx;
+			}
+			
+			&.assist {
+				flex: 1;
+				background: linear-gradient(135deg, #49AFFF, #6a5af9);
+				color: white;
+				border-radius: 50rpx;
+				padding: 20rpx 40rpx;
+				font-size: 28rpx;
+				font-weight: bold;
+				
+				text {
+					color: white;
+					margin-top: 0;
+				}
+			}
 		}
 	}
 	
-	.confirm-popup {
-		padding: 40rpx;
-		width: 600rpx;
+	.share-popup {
+		background: white;
+		padding: 30rpx;
+		border-radius: 20rpx 20rpx 0 0;
 		
-		.popup-title {
-			font-size: 36rpx;
-			font-weight: bold;
-			color: #333;
-			text-align: center;
+		.popup-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 			margin-bottom: 30rpx;
+			
+			text {
+				font-size: 32rpx;
+				font-weight: bold;
+			}
 		}
 		
-		.popup-content {
-			.confirm-info {
-				background: #f5f5f5;
-				border-radius: 10rpx;
-				padding: 20rpx;
-				margin-bottom: 30rpx;
-				
-				.info-row {
-					display: flex;
-					justify-content: space-between;
-					padding: 10rpx 0;
-					border-bottom: 1rpx solid #eee;
-					
-					.label {
-						font-size: 26rpx;
-						color: #666;
-					}
-					
-					.value {
-						font-size: 26rpx;
-						color: #333;
-						text-align: right;
-						
-						&.price {
-							color: #FF5722;
-							font-weight: bold;
-						}
-					}
-				}
-			}
+		.share-options {
+			display: flex;
+			justify-content: space-around;
+			padding: 20rpx 0;
 			
-			.count-selector {
-				.selector-label {
-					font-size: 26rpx;
-					color: #666;
-					margin-bottom: 15rpx;
-				}
+			.share-option {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				padding: 20rpx;
 				
-				.counter {
+				.share-icon {
+					width: 80rpx;
+					height: 80rpx;
 					display: flex;
 					align-items: center;
 					justify-content: center;
+					background: #f5f5f5;
+					border-radius: 50%;
+					margin-bottom: 10rpx;
+				}
+				
+				.share-name {
+					font-size: 24rpx;
+					color: #666;
+				}
+			}
+		}
+	}
+	
+	.assist-popup {
+		background: white;
+		padding: 30rpx;
+		border-radius: 20rpx 20rpx 0 0;
+		
+		.popup-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 30rpx;
+			
+			text {
+				font-size: 32rpx;
+				font-weight: bold;
+			}
+		}
+		
+		.assist-content {
+			padding: 20rpx 0;
+			
+			.assist-info {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 30rpx;
+				padding: 20rpx;
+				background: #f8f9fa;
+				border-radius: 12rpx;
+				
+				.task-title {
+					font-size: 28rpx;
+					color: #333;
+					font-weight: bold;
+				}
+				
+				.task-price {
+					font-size: 32rpx;
+					color: #FF5722;
+					font-weight: bold;
+				}
+			}
+			
+			.assist-count {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 30rpx;
+				padding: 20rpx;
+				background: #f8f9fa;
+				border-radius: 12rpx;
+				
+				.count-label {
+					font-size: 28rpx;
+					color: #333;
+				}
+				
+				.count-controls {
+					display: flex;
+					align-items: center;
 					
-					.counter-btn {
-						width: 60rpx;
-						height: 60rpx;
-						background: #f5f5f5;
-						border: 1rpx solid #ddd;
-						border-radius: 50%;
-						font-size: 30rpx;
+					.count-btn {
+						width: 48rpx;
+						height: 48rpx;
 						display: flex;
 						align-items: center;
 						justify-content: center;
-						
-						&:disabled {
-							background: #eee;
-							color: #999;
-						}
+						background: white;
+						border: 1rpx solid #ddd;
+						border-radius: 50%;
 					}
 					
-					.counter-input {
-						width: 80rpx;
-						height: 60rpx;
-						text-align: center;
-						border: 1rpx solid #ddd;
-						border-left: none;
-						border-right: none;
-						font-size: 30rpx;
+					.count-value {
+						margin: 0 20rpx;
+						font-size: 32rpx;
+						font-weight: bold;
+						color: #333;
 					}
+				}
+			}
+			
+			.total-cost {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 20rpx;
+				background: #f8f9fa;
+				border-radius: 12rpx;
+				margin-bottom: 30rpx;
+				
+				.cost-label {
+					font-size: 28rpx;
+					color: #333;
+					font-weight: bold;
+				}
+				
+				.cost-value {
+					font-size: 36rpx;
+					color: #FF5722;
+					font-weight: bold;
 				}
 			}
 		}
 		
-		.popup-actions {
+		.popup-footer {
 			display: flex;
 			gap: 20rpx;
-			margin-top: 30rpx;
 			
-			button {
+			.cancel-btn, .confirm-btn {
 				flex: 1;
 				padding: 20rpx;
-				border-radius: 10rpx;
+				border-radius: 50rpx;
 				font-size: 28rpx;
+				font-weight: bold;
+				border: none;
 			}
 			
 			.cancel-btn {
@@ -849,7 +805,7 @@ export default {
 			}
 			
 			.confirm-btn {
-				background: #4CAF50;
+				background: linear-gradient(135deg, #49AFFF, #6a5af9);
 				color: white;
 			}
 		}
