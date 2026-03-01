@@ -64,7 +64,7 @@
                 "desc" : "你的位置信息将用于小程序位置接口的效果展示"
             }
         },
-        "appid" : "",
+        "appid" : "wxe87cc392dffc53c5",
         "setting" : {
             "urlCheck" : false,
             "es6" : true,

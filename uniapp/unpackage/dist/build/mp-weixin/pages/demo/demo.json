@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "demo",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-empty": "/uni_modules/uview-ui/components/u-empty/u-empty",
+    "uni-popup": "/uni_modules/uni-popup/components/uni-popup/uni-popup"
+  }
+}

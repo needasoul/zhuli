@@ -1,0 +1,1 @@
+<view class="data-v-960fcba8"><block wx:if="{{isFinishedLoading}}"><view class="kong data-v-960fcba8"><view class="text data-v-960fcba8">{{showContents}}</view></view></block></view>

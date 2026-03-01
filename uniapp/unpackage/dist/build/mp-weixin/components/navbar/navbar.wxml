@@ -1,0 +1,1 @@
+<view><view class="flexc flexs"><u-icon vue-id="982fa97c-1" name="arrow-left" color="{{color}}" size="{{size}}" data-event-opts="{{[['^click',[['routerBack']]]]}}" bind:click="__e" bind:__l="__l"></u-icon><view class="text" style="{{'color:'+(color)+';'}}">{{''+title+''}}</view><view></view></view></view>

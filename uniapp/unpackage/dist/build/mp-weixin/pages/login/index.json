@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "登录注册",
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "u-divider": "/uni_modules/uview-ui/components/u-divider/u-divider",
+    "u-popup": "/uni_modules/uview-ui/components/u-popup/u-popup"
+  }
+}

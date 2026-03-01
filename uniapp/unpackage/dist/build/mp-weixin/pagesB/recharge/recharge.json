@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "充值记录",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-empty": "/uni_modules/uview-ui/components/u-empty/u-empty",
+    "u-calendar": "/uni_modules/uview-ui/components/u-calendar/u-calendar"
+  }
+}

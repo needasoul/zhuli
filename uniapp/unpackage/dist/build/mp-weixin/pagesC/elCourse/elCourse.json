@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "报名课程",
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "head-bg": "/components/headBg/headBg",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "paypopup": "/components/paypopup/paypopup"
+  }
+}

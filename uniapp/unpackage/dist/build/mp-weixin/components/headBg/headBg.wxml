@@ -1,0 +1,1 @@
+<view><view class="head"><image class="head_img" src="../../static/bx.png" mode></image></view><view class="nav pl-38 pr-38"><navbar vue-id="73af9ce2-1" color="#fff" title="{{title}}" bind:__l="__l"></navbar></view></view>

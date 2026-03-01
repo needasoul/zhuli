@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "订单详情",
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "head-bg": "/components/headBg/headBg",
+    "u-count-down": "/uni_modules/uview-ui/components/u-count-down/u-count-down",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "u-divider": "/uni_modules/uview-ui/components/u-divider/u-divider"
+  }
+}

@@ -1,0 +1,1 @@
+<view hidden="{{!(display)}}" class="box"><rich-text nodes="{{content.content}}"></rich-text></view>

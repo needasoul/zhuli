@@ -65,8 +65,8 @@
 				</view>
 				<view class="detail-item">
 					<view class="detail-label">任务状态</view>
-					<view class="detail-value status" :class="getStatusClass(boostDetail.status)">
-						{{ getStatusText(boostDetail.status) }}
+					<view class="detail-value status" :class="statusClass">
+						{{ statusText }}
 					</view>
 				</view>
 			</view>
@@ -210,7 +210,7 @@ export default {
 		return {
 			boostDetail: {
 				id: 1,
-				title: '【京东】618购物节助力',
+				title: '【京东】618 购物节助力',
 				description: '助力解锁大额优惠券，享受购物折扣，任务简单易完成，助力后请截图发送给发布者确认。',
 				price: '1.88',
 				status: 'ongoing',
@@ -227,6 +227,27 @@ export default {
 					tasks: 128,
 					success: 125,
 					rating: 98
+				}
+			},
+			showShareSheet: false,
+			showAssistConfirm: false,
+			assistCount: 1,
+			totalAssistCost: 1.88
+		};
+	},
+	computed: {
+		statusClass() {
+			return `status-${this.boostDetail.status}`;
+		},
+		statusText() {
+			const statusMap = {
+				'ongoing': '进行中',
+				'popular': '热门',
+				'new': '新发布',
+				'completed': '已完成'
+			};
+			return statusMap[this.boostDetail.status] || '';
+		}
 				}
 			},
 			isCollected: false,
@@ -250,22 +271,6 @@ export default {
 		// 返回上一页
 		goBack() {
 			uni.navigateBack();
-		},
-		
-		// 获取状态文本
-		getStatusText(status) {
-			const statusMap = {
-				'ongoing': '进行中',
-				'popular': '热门',
-				'new': '新发布',
-				'completed': '已完成'
-			};
-			return statusMap[status] || '';
-		},
-		
-		// 获取状态样式类
-		getStatusClass(status) {
-			return `status-${status}`;
 		},
 		
 		// 复制链接

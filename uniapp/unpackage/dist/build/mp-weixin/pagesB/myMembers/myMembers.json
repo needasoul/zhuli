@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "积分商城",
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar",
+    "u-empty": "/uni_modules/uview-ui/components/u-empty/u-empty"
+  }
+}

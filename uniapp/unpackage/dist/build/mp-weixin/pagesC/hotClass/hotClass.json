@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "热门课程",
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar",
+    "u-tabs": "/uni_modules/uview-ui/components/u-tabs/u-tabs",
+    "u-empty": "/uni_modules/uview-ui/components/u-empty/u-empty"
+  }
+}

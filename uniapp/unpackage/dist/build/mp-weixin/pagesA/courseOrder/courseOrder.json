@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "课程订单",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-tabs": "/uni_modules/uview-ui/components/u-tabs/u-tabs",
+    "u-empty": "/uni_modules/uview-ui/components/u-empty/u-empty",
+    "u-count-down": "/uni_modules/uview-ui/components/u-count-down/u-count-down",
+    "paypopup": "/components/paypopup/paypopup"
+  }
+}

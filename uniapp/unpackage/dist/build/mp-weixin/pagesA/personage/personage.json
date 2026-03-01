@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "设置",
+  "enablePullDownRefresh": false,
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar",
+    "u-picker": "/uni_modules/uview-ui/components/u-picker/u-picker"
+  }
+}
