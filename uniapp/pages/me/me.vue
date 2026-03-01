@@ -34,31 +34,31 @@
 			<view class="order-tabs">
 				<view class="order-tab" @click="goToOrderByStatus('pending')">
 					<view class="tab-icon">
-						<u-icon name="clock" color="#49AFFF" size="48"></u-icon>
+						<u-icon name="clock-fill" color="#49AFFF" size="48"></u-icon>
 					</view>
 					<view class="tab-text">审核中</view>
 				</view>
 				<view class="order-tab" @click="goToOrderByStatus('rejected')">
 					<view class="tab-icon">
-						<u-icon name="close-circle" color="#FF5722" size="48"></u-icon>
+						<u-icon name="close" color="#FF5722" size="48"></u-icon>
 					</view>
 					<view class="tab-text">未通过</view>
 				</view>
 				<view class="order-tab" @click="goToOrderByStatus('waiting')">
 					<view class="tab-icon">
-						<u-icon name="time" color="#FFC107" size="48"></u-icon>
+						<u-icon name="time-fill" color="#FFC107" size="48"></u-icon>
 					</view>
 					<view class="tab-text">待开始</view>
 				</view>
 				<view class="order-tab" @click="goToOrderByStatus('ongoing')">
 					<view class="tab-icon">
-						<u-icon name="refresh" color="#2196F3" size="48"></u-icon>
+						<u-icon name="reload" color="#2196F3" size="48"></u-icon>
 					</view>
 					<view class="tab-text">进行中</view>
 				</view>
 				<view class="order-tab" @click="goToOrderByStatus('confirming')">
 					<view class="tab-icon">
-						<u-icon name="check-circle" color="#4CAF50" size="48"></u-icon>
+						<u-icon name="checkmark" color="#4CAF50" size="48"></u-icon>
 					</view>
 					<view class="tab-text">待确认</view>
 				</view>
@@ -79,13 +79,13 @@
 				</view>
 				<view class="task-item" @click="goToAcceptedTasks">
 					<view class="task-icon">
-						<u-icon name="checkmark-circle" color="#4CAF50" size="48"></u-icon>
+						<u-icon name="checkmark" color="#4CAF50" size="48"></u-icon>
 					</view>
 					<view class="task-text">已接任务</view>
 				</view>
 				<view class="task-item" @click="goToPublishedTasks">
 					<view class="task-icon">
-						<u-icon name="send" color="#FF9800" size="48"></u-icon>
+						<u-icon name="arrow-right" color="#FF9800" size="48"></u-icon>
 					</view>
 					<view class="task-text">已发布任务</view>
 				</view>
@@ -106,7 +106,7 @@
 			<view class="service-grid">
 				<view class="service-item" @click="goToPersonalInfo">
 					<view class="service-icon">
-						<u-icon name="account" color="#49AFFF" size="48"></u-icon>
+						<u-icon name="user" color="#49AFFF" size="48"></u-icon>
 					</view>
 					<view class="service-text">个人资料</view>
 				</view>
@@ -118,7 +118,7 @@
 				</view>
 				<view class="service-item" @click="goToOnlineService">
 					<view class="service-icon">
-						<u-icon name="headphones" color="#FF9800" size="48"></u-icon>
+						<u-icon name="service" color="#FF9800" size="48"></u-icon>
 					</view>
 					<view class="service-text">在线客服</view>
 				</view>
