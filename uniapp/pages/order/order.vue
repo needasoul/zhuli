@@ -28,8 +28,8 @@
 			<view class="order-item" v-for="(order, index) in orderList" :key="order.id">
 				<view class="order-header">
 					<view class="order-info">
-						<view class="order-id">订单号: {{ order.orderId }}</view>
-						<view class="order-status" :class="getStatusClass(order.status)">{{ getStatusText(order.status) }}</view>
+						<view class="order-id">订单号：{{ order.orderId }}</view>
+						<view class="order-status" :class="`status-${order.status}`">{{ getStatusText(order.status) }}</view>
 					</view>
 					<view class="order-platform">
 						<image :src="order.platformIcon" mode="aspectFit"></image>
@@ -248,11 +248,6 @@ export default {
 				'cancelled': '已取消'
 			};
 			return statusMap[status] || '';
-		},
-		
-		// 获取状态样式类
-		getStatusClass(status) {
-			return `status-${status}`;
 		},
 		
 		// 返回上一页

@@ -50,7 +50,7 @@
 							<image :src="item.platformIcon" mode="aspectFit"></image>
 							<text class="platform-name">{{ item.platformName }}</text>
 						</view>
-						<view class="boost-status" :class="getStatusClass(item.status)">
+						<view class="boost-status" :class="`status-${item.status}`">
 							{{ getStatusText(item.status) }}
 						</view>
 					</view>
@@ -224,11 +224,6 @@ export default {
 				'completed': '已完成'
 			};
 			return statusMap[status] || '';
-		},
-		
-		// 获取状态样式类
-		getStatusClass(status) {
-			return `status-${status}`;
 		},
 		
 		// 跳转到助力详情
