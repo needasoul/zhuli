@@ -34,31 +34,31 @@
 			<view class="order-tabs">
 				<view class="order-tab" @click="goToOrderByStatus('pending')">
 					<view class="tab-icon">
-						<u-icon name="clock-fill" color="#49AFFF" size="48"></u-icon>
+						<text class="icon-text">⏱️</text>
 					</view>
 					<view class="tab-text">审核中</view>
 				</view>
 				<view class="order-tab" @click="goToOrderByStatus('rejected')">
 					<view class="tab-icon">
-						<u-icon name="close" color="#FF5722" size="48"></u-icon>
+						<text class="icon-text">❌</text>
 					</view>
 					<view class="tab-text">未通过</view>
 				</view>
 				<view class="order-tab" @click="goToOrderByStatus('waiting')">
 					<view class="tab-icon">
-						<u-icon name="time-fill" color="#FFC107" size="48"></u-icon>
+						<text class="icon-text">⏰</text>
 					</view>
 					<view class="tab-text">待开始</view>
 				</view>
 				<view class="order-tab" @click="goToOrderByStatus('ongoing')">
 					<view class="tab-icon">
-						<u-icon name="reload" color="#2196F3" size="48"></u-icon>
+						<text class="icon-text">🔄</text>
 					</view>
 					<view class="tab-text">进行中</view>
 				</view>
 				<view class="order-tab" @click="goToOrderByStatus('confirming')">
 					<view class="tab-icon">
-						<u-icon name="checkmark" color="#4CAF50" size="48"></u-icon>
+						<text class="icon-text">✅</text>
 					</view>
 					<view class="tab-text">待确认</view>
 				</view>
@@ -73,25 +73,25 @@
 			<view class="task-grid">
 				<view class="task-item" @click="goToTaskCenter">
 					<view class="task-icon">
-						<u-icon name="list" color="#49AFFF" size="48"></u-icon>
+						<text class="icon-text">📋</text>
 					</view>
 					<view class="task-text">任务中心</view>
 				</view>
 				<view class="task-item" @click="goToAcceptedTasks">
 					<view class="task-icon">
-						<u-icon name="checkmark" color="#4CAF50" size="48"></u-icon>
+						<text class="icon-text">✔️</text>
 					</view>
 					<view class="task-text">已接任务</view>
 				</view>
 				<view class="task-item" @click="goToPublishedTasks">
 					<view class="task-icon">
-						<u-icon name="arrow-right" color="#FF9800" size="48"></u-icon>
+						<text class="icon-text">📤</text>
 					</view>
 					<view class="task-text">已发布任务</view>
 				</view>
 				<view class="task-item" @click="goToTaskAudit">
 					<view class="task-icon">
-						<u-icon name="search" color="#9C27B0" size="48"></u-icon>
+						<text class="icon-text">🔍</text>
 					</view>
 					<view class="task-text">任务审核</view>
 				</view>
@@ -106,55 +106,55 @@
 			<view class="service-grid">
 				<view class="service-item" @click="goToPersonalInfo">
 					<view class="service-icon">
-						<u-icon name="user" color="#49AFFF" size="48"></u-icon>
+						<text class="icon-text">👤</text>
 					</view>
 					<view class="service-text">个人资料</view>
 				</view>
 				<view class="service-item" @click="toggleWechatNotice">
 					<view class="service-icon">
-						<u-icon name="chat" color="#4CAF50" size="48"></u-icon>
+						<text class="icon-text">💬</text>
 					</view>
 					<view class="service-text">开启微信通知</view>
 				</view>
 				<view class="service-item" @click="goToOnlineService">
 					<view class="service-icon">
-						<u-icon name="service" color="#FF9800" size="48"></u-icon>
+						<text class="icon-text">🛎️</text>
 					</view>
 					<view class="service-text">在线客服</view>
 				</view>
 				<view class="service-item" @click="join交流群">
 					<view class="service-icon">
-						<u-icon name="group" color="#9C27B0" size="48"></u-icon>
+						<text class="icon-text">👥</text>
 					</view>
 					<view class="service-text">加入交流群</view>
 				</view>
 				<view class="service-item" @click="goToUserAgreement">
 					<view class="service-icon">
-						<u-icon name="document" color="#2196F3" size="48"></u-icon>
+						<text class="icon-text">📄</text>
 					</view>
 					<view class="service-text">用户协议</view>
 				</view>
 				<view class="service-item" @click="goToPrivacyAgreement">
 					<view class="service-icon">
-						<u-icon name="lock" color="#607D8B" size="48"></u-icon>
+						<text class="icon-text">🔒</text>
 					</view>
 					<view class="service-text">隐私协议</view>
 				</view>
 				<view class="service-item" @click="goToRechargeAgreement">
 					<view class="service-icon">
-						<u-icon name="rmb" color="#4CAF50" size="48"></u-icon>
+						<text class="icon-text">💰</text>
 					</view>
 					<view class="service-text">充值协议</view>
 				</view>
 				<view class="service-item" @click="goToSelfDelivery">
 					<view class="service-icon">
-						<u-icon name="upload" color="#FF5722" size="48"></u-icon>
+						<text class="icon-text">📤</text>
 					</view>
 					<view class="service-text">自助投放</view>
 				</view>
 				<view class="service-item" @click="goToPromote">
 					<view class="service-icon">
-						<u-icon name="share" color="#FFC107" size="48"></u-icon>
+						<text class="icon-text">📣</text>
 					</view>
 					<view class="service-text">我要推广</view>
 				</view>
@@ -435,13 +435,17 @@ export default {
 					align-items: center;
 					
 					.tab-icon {
-						width: 60rpx;
-						height: 60rpx;
-						display: flex;
-						align-items: center;
-						justify-content: center;
-						margin-bottom: 10rpx;
-					}
+					width: 60rpx;
+					height: 60rpx;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					margin-bottom: 10rpx;
+				}
+				
+				.icon-text {
+					font-size: 40rpx;
+				}
 					
 					.tab-text {
 						font-size: 24rpx;
