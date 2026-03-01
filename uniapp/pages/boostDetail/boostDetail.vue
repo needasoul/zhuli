@@ -247,10 +247,9 @@ export default {
 				'completed': '已完成'
 			};
 			return statusMap[this.boostDetail.status] || '';
-		}
-				}
-			},
-			isCollected: false,
+		},
+		
+		isCollected: false,
 			showShareSheet: false,
 			showAssistConfirm: false,
 			assistCount: 1,
@@ -260,9 +259,21 @@ export default {
 				{name: 'QQ', icon: 'qq'},
 				{name: '复制链接', icon: 'copy'}
 			]
-		}
+		};
 	},
 	computed: {
+		statusClass() {
+			return `status-${this.boostDetail.status}`;
+		},
+		statusText() {
+			const statusMap = {
+				'ongoing': '进行中',
+				'popular': '热门',
+				'new': '新发布',
+				'completed': '已完成'
+			};
+			return statusMap[this.boostDetail.status] || '';
+		},
 		totalAssistCost() {
 			return (parseFloat(this.boostDetail.price || 0) * this.assistCount).toFixed(2);
 		}
