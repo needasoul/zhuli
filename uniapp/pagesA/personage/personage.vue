@@ -7,9 +7,9 @@
 			<!-- #endif -->
 		</view>
 		<view class="content zindex">
-			<view class="" style="position: relative;">
-				<button style="margin-top: -60rpx;" size='mini' open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
-					<image class="user_class_2_img" :src="imgall" mode="" />
+			<view class="avatar-box" style="position: relative; display: flex; justify-content: center; margin-top: 20rpx;">
+				<button class="avatar-button" size='mini' open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
+					<image class="user_class_2_img" :src="imgall || '/static/default-avatar.png'" mode="aspectFill" />
 				</button>
 				<image class="editImg" src="../static/icon9.png" mode=""></image>
 			</view>
@@ -18,23 +18,23 @@
 			</view>
 			<view class="user_class">
 				<view class="user_class_1">
-					<view class="user_class_1_left">
-						昵称
-					</view>
-					<view class="user_class_1_right">
-						<input class="user_class_1_right_text" maxlength="20" v-model="user_name" type="nickname"
-							placeholder="请输入昵称" @change="inputuser" />
-					</view>
+				<view class="user_class_1_left">
+					昵称
 				</view>
-				<view class="user_class_1">
-					<view class="user_class_1_left">
-						手机号
-					</view>
-					<view class="user_class_1_right">
-						<input type="text" placeholder="填写手机号" @blur="blur" @focus="focus" maxlength="11"
-							v-model="cell" />
-					</view>
+				<view class="user_class_1_right">
+					<input class="user_class_1_right_text" maxlength="20" v-model="user_name" type="text"
+						placeholder="请输入昵称" @input="inputuser" />
 				</view>
+			</view>
+			<view class="user_class_1">
+				<view class="user_class_1_left">
+					手机号
+				</view>
+				<view class="user_class_1_right">
+					<input class="user_class_1_right_text" type="number" placeholder="填写手机号" @blur="blur" @focus="focus" maxlength="11"
+						v-model="cell" />
+				</view>
+			</view>
 
 				<view class="user_class_1">
 					<view class="user_class_1_left">
@@ -131,7 +131,6 @@
 		methods: {
 			inputuser(e) {
 				this.user_name = e.detail.value
-				console.log('eee', e);
 			},
 			setshow(e) {
 				this.columns[0] = []
@@ -237,21 +236,27 @@
 				} else {
 					return this.showToast('请填写出生日期')
 				}
+				uni.showLoading({
+					title: '保存中...'
+				})
 				userprofile({
 					file: this.file,
 					username: this.user_name,
 					birthday: this.mailbox,
 					mobile: this.cell2
 				}).then(res => {
-					console.log(res);
+					uni.hideLoading()
 					if (res.code == 1) {
-						this.init()
 						this.showToast('保存成功')
-						uni.navigateBack()
+						setTimeout(() => {
+							uni.navigateBack()
+						}, 500)
 					} else {
-						this.showToast('修改失败')
-
+						this.showToast(res.msg || '修改失败')
 					}
+				}).catch(err => {
+					uni.hideLoading()
+					this.showToast('保存失败')
 				})
 
 			},
@@ -358,25 +363,35 @@
 		background: #fff;
 	}
 
-	button {
-		width: 100%;
-		height: 100%;
+	
+
+	.avatar-box {
+		position: relative;
+		display: flex;
+		justify-content: center;
+		margin-top: 20rpx;
+	}
+	
+	.avatar-button {
+		width: 178rpx;
+		height: 178rpx;
 		padding: 0;
 		margin: 0;
 		background-color: transparent;
-	}
-
-	button::after {
 		border: none;
 	}
-
+	
+	.avatar-button::after {
+		border: none;
+	}
+	
 	.editImg {
 		width: 36rpx;
 		height: 36rpx;
 		position: absolute;
-		top: 80rpx;
-		left: 58%;
-		transform: translateX(-50%);
+		bottom: 0;
+		right: 50%;
+		transform: translateX(120rpx);
 	}
 
 	.content {
@@ -446,8 +461,10 @@
 		background: #FCFBFE;
 		border-radius: 20rpx 20rpx 20rpx 20rpx;
 		border: 2rpx solid #F0EFF2;
-		padding: 24rpx 30rpx 0;
+		padding: 0 30rpx;
 		box-sizing: border-box;
+		display: flex;
+		align-items: center;
 
 		.user_class_1_right_title {
 			font-size: 26rpx;
@@ -467,21 +484,32 @@
 	}
 
 	.user_class_1_right_text {
+		flex: 1;
 		font-size: 26rpx;
 		font-weight: 400;
-		color: #999999;
+		color: #333;
 		letter-spacing: 1px;
+		height: 94rpx;
+		line-height: 94rpx;
 	}
 
 	.content_1_save {
 		width: 690rpx;
 		height: 84rpx;
-		background: #64BAFD;
+		background: linear-gradient(90deg, #49AFFF, #2196F3);
 		border-radius: 22rpx 22rpx 22rpx 22rpx;
 		color: #fff;
 		text-align: center;
 		line-height: 84rpx;
 		margin: 78rpx auto 0;
+		font-size: 32rpx;
+		font-weight: 500;
+		box-shadow: 0 4rpx 12rpx rgba(73, 175, 255, 0.3);
+	}
+	
+	.content_1_save:active {
+		opacity: 0.8;
+		transform: scale(0.98);
 	}
 
 	.user_class_1_right_2 {
