@@ -33,23 +33,33 @@
 			</view>
 			<view class="order-tabs">
 				<view class="order-tab" @click="goToOrderByStatus('pending')">
-					<image class="tab-icon" src="../../static/me/order_auditing.png" mode="aspectFit"></image>
+					<view class="tab-icon">
+						<u-icon name="clock" color="#49AFFF" size="48"></u-icon>
+					</view>
 					<view class="tab-text">审核中</view>
 				</view>
 				<view class="order-tab" @click="goToOrderByStatus('rejected')">
-					<image class="tab-icon" src="../../static/me/order_rejected.png" mode="aspectFit"></image>
+					<view class="tab-icon">
+						<u-icon name="close-circle" color="#FF5722" size="48"></u-icon>
+					</view>
 					<view class="tab-text">未通过</view>
 				</view>
 				<view class="order-tab" @click="goToOrderByStatus('waiting')">
-					<image class="tab-icon" src="../../static/me/order_waiting.png" mode="aspectFit"></image>
+					<view class="tab-icon">
+						<u-icon name="time" color="#FFC107" size="48"></u-icon>
+					</view>
 					<view class="tab-text">待开始</view>
 				</view>
 				<view class="order-tab" @click="goToOrderByStatus('ongoing')">
-					<image class="tab-icon" src="../../static/me/order_ongoing.png" mode="aspectFit"></image>
+					<view class="tab-icon">
+						<u-icon name="refresh" color="#2196F3" size="48"></u-icon>
+					</view>
 					<view class="tab-text">进行中</view>
 				</view>
 				<view class="order-tab" @click="goToOrderByStatus('confirming')">
-					<image class="tab-icon" src="../../static/me/order_confirming.png" mode="aspectFit"></image>
+					<view class="tab-icon">
+						<u-icon name="check-circle" color="#4CAF50" size="48"></u-icon>
+					</view>
 					<view class="tab-text">待确认</view>
 				</view>
 			</view>
@@ -62,19 +72,27 @@
 			</view>
 			<view class="task-grid">
 				<view class="task-item" @click="goToTaskCenter">
-					<image class="task-icon" src="../../static/me/task_center.png" mode="aspectFit"></image>
+					<view class="task-icon">
+						<u-icon name="list" color="#49AFFF" size="48"></u-icon>
+					</view>
 					<view class="task-text">任务中心</view>
 				</view>
 				<view class="task-item" @click="goToAcceptedTasks">
-					<image class="task-icon" src="../../static/me/task_accepted.png" mode="aspectFit"></image>
+					<view class="task-icon">
+						<u-icon name="checkmark-circle" color="#4CAF50" size="48"></u-icon>
+					</view>
 					<view class="task-text">已接任务</view>
 				</view>
 				<view class="task-item" @click="goToPublishedTasks">
-					<image class="task-icon" src="../../static/me/task_published.png" mode="aspectFit"></image>
+					<view class="task-icon">
+						<u-icon name="send" color="#FF9800" size="48"></u-icon>
+					</view>
 					<view class="task-text">已发布任务</view>
 				</view>
 				<view class="task-item" @click="goToTaskAudit">
-					<image class="task-icon" src="../../static/me/task_audit.png" mode="aspectFit"></image>
+					<view class="task-icon">
+						<u-icon name="search" color="#9C27B0" size="48"></u-icon>
+					</view>
 					<view class="task-text">任务审核</view>
 				</view>
 			</view>
@@ -87,39 +105,57 @@
 			</view>
 			<view class="service-grid">
 				<view class="service-item" @click="goToPersonalInfo">
-					<image class="service-icon" src="../../static/me/service_profile.png" mode="aspectFit"></image>
+					<view class="service-icon">
+						<u-icon name="account" color="#49AFFF" size="48"></u-icon>
+					</view>
 					<view class="service-text">个人资料</view>
 				</view>
 				<view class="service-item" @click="toggleWechatNotice">
-					<image class="service-icon" src="../../static/me/service_wechat.png" mode="aspectFit"></image>
+					<view class="service-icon">
+						<u-icon name="chat" color="#4CAF50" size="48"></u-icon>
+					</view>
 					<view class="service-text">开启微信通知</view>
 				</view>
 				<view class="service-item" @click="goToOnlineService">
-					<image class="service-icon" src="../../static/me/service_customer.png" mode="aspectFit"></image>
+					<view class="service-icon">
+						<u-icon name="headphones" color="#FF9800" size="48"></u-icon>
+					</view>
 					<view class="service-text">在线客服</view>
 				</view>
 				<view class="service-item" @click="join交流群">
-					<image class="service-icon" src="../../static/me/service_group.png" mode="aspectFit"></image>
+					<view class="service-icon">
+						<u-icon name="group" color="#9C27B0" size="48"></u-icon>
+					</view>
 					<view class="service-text">加入交流群</view>
 				</view>
 				<view class="service-item" @click="goToUserAgreement">
-					<image class="service-icon" src="../../static/me/service_agreement.png" mode="aspectFit"></image>
+					<view class="service-icon">
+						<u-icon name="document" color="#2196F3" size="48"></u-icon>
+					</view>
 					<view class="service-text">用户协议</view>
 				</view>
 				<view class="service-item" @click="goToPrivacyAgreement">
-					<image class="service-icon" src="../../static/me/service_privacy.png" mode="aspectFit"></image>
+					<view class="service-icon">
+						<u-icon name="lock" color="#607D8B" size="48"></u-icon>
+					</view>
 					<view class="service-text">隐私协议</view>
 				</view>
 				<view class="service-item" @click="goToRechargeAgreement">
-					<image class="service-icon" src="../../static/me/service_recharge.png" mode="aspectFit"></image>
+					<view class="service-icon">
+						<u-icon name="rmb" color="#4CAF50" size="48"></u-icon>
+					</view>
 					<view class="service-text">充值协议</view>
 				</view>
 				<view class="service-item" @click="goToSelfDelivery">
-					<image class="service-icon" src="../../static/me/service_delivery.png" mode="aspectFit"></image>
+					<view class="service-icon">
+						<u-icon name="upload" color="#FF5722" size="48"></u-icon>
+					</view>
 					<view class="service-text">自助投放</view>
 				</view>
 				<view class="service-item" @click="goToPromote">
-					<image class="service-icon" src="../../static/me/service_promote.png" mode="aspectFit"></image>
+					<view class="service-icon">
+						<u-icon name="share" color="#FFC107" size="48"></u-icon>
+					</view>
 					<view class="service-text">我要推广</view>
 				</view>
 			</view>
@@ -393,22 +429,25 @@ export default {
 			border-top: 1rpx solid #eee;
 			
 			.order-tab {
-				flex: 1;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				
-				.tab-icon {
-					width: 60rpx;
-					height: 60rpx;
-					margin-bottom: 10rpx;
+					flex: 1;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					
+					.tab-icon {
+						width: 60rpx;
+						height: 60rpx;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						margin-bottom: 10rpx;
+					}
+					
+					.tab-text {
+						font-size: 24rpx;
+						color: #666;
+					}
 				}
-				
-				.tab-text {
-					font-size: 24rpx;
-					color: #666;
-				}
-			}
 		}
 	}
 	
@@ -423,21 +462,24 @@ export default {
 			border-top: 1rpx solid #eee;
 			
 			.task-item {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				
-				.task-icon {
-					width: 60rpx;
-					height: 60rpx;
-					margin-bottom: 10rpx;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					
+					.task-icon {
+						width: 60rpx;
+						height: 60rpx;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						margin-bottom: 10rpx;
+					}
+					
+					.task-text {
+						font-size: 24rpx;
+						color: #666;
+					}
 				}
-				
-				.task-text {
-					font-size: 24rpx;
-					color: #666;
-				}
-			}
 		}
 	}
 	
@@ -451,22 +493,25 @@ export default {
 			border-top: 1rpx solid #eee;
 			
 			.service-item {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				padding: 20rpx 0;
-				
-				.service-icon {
-					width: 60rpx;
-					height: 60rpx;
-					margin-bottom: 10rpx;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					padding: 20rpx 0;
+					
+					.service-icon {
+						width: 60rpx;
+						height: 60rpx;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						margin-bottom: 10rpx;
+					}
+					
+					.service-text {
+						font-size: 24rpx;
+						color: #666;
+					}
 				}
-				
-				.service-text {
-					font-size: 24rpx;
-					color: #666;
-				}
-			}
 		}
 	}
 }
