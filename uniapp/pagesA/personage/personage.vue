@@ -34,33 +34,6 @@
 				</view>
 			</view>
 
-				<view class="user_class_1">
-					<view class="user_class_1_left">
-						出生日期
-					</view>
-					<view class="user_class_time_box flexc flexs">
-						<view class="user_class_time_box_item flexc" @click="setshow(1)">
-							<input disabled="true" v-model="year" type="text" placeholder="年" />
-							<view class="pt-6" style="height: 28rpx;">
-								<u-icon name="arrow-down" size="16"></u-icon>
-							</view>
-						</view>
-						<view class="user_class_time_box_item flexc" @click="setshow(2)">
-							<input disabled="true" v-model="mouth" type="text" placeholder="月" />
-							<view class="pt-6" style="height: 28rpx;">
-								<u-icon name="arrow-down" size="16"></u-icon>
-							</view>
-						</view>
-						<view class="user_class_time_box_item flexc" @click="setshow(3)">
-							<input type="text" disabled="true" v-model="day" placeholder="日" />
-							<view class="pt-6" style="height: 26rpx;">
-								<u-icon name="arrow-down" size="16"></u-icon>
-							</view>
-						</view>
-					</view>
-
-				</view>
-
 				<view class="content_1_save" @click="accomplish">
 					保存
 				</view>
@@ -231,24 +204,20 @@
 					})
 					return
 				}
-				if (this.year && this.mouth && this.day) {
-					this.mailbox = this.year + "-" + this.mouth + '-' + this.day
-				} else {
-					return this.showToast('请填写出生日期')
-				}
-				if (!this.file) {
-					return this.showToast('请先上传头像')
-				}
 				if (!this.user_name) {
 					return this.showToast('请填写昵称')
+				}
+				// 如果没有上传头像，使用默认头像
+				let saveFile = this.file
+				if (!saveFile) {
+					saveFile = '/static/images/avatar.png'
 				}
 				uni.showLoading({
 					title: '保存中...'
 				})
 				userprofile({
-					file: this.file,
+					file: saveFile,
 					username: this.user_name,
-					birthday: this.mailbox,
 					mobile: this.cell2
 				}).then(res => {
 					console.log('保存结果:', res)
