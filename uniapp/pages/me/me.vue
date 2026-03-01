@@ -1,107 +1,126 @@
 <template>
-	<view>
-		<image class="bgImg" src="@/static/newsimg/icon4.png" mode=""></image>
-		<view class="top-box zindex">
-			<view class="user-box zindex" @click="routerGo('/pagesA/personage/personage')">
-				<view class="text_center ">
-					<view class="yes-box" v-if="token">
-						<image :src="intall.avatar" mode=""></image>
-						<view class="edit">
-							<u-icon name="edit-pen-fill" color="#696969" size="14"></u-icon>
-						</view>
-					</view>
-					<view class="yes-box" v-else>
-						<image src="../../static/images/avatar.png" mode=""></image>
-					</view>
-					<view class="">
-						<view class="user-name" v-if="token">
-							{{intall.username || '用户'}}
-						</view>
-						<view class="user-name" v-else>
-							请登录
-						</view>
-					</view>
-					<view class="bell-box">
-						<!-- <image src="@/static/images/bell.png" mode=""></image> -->
-					</view>
+	<view class="me-container">
+		<!-- 顶部用户信息 -->
+		<view class="user-section">
+			<view class="user-info">
+				<image class="avatar" :src="intall.avatar || '../../static/images/avatar.png'" mode="aspectFill"></image>
+				<view class="user-details">
+					<view class="user-name">{{ intall.username || '用户' }}</view>
+					<view class="user-phone">{{ userPhone || '15068916196' }}</view>
 				</view>
 			</view>
 		</view>
 
-		<!-- 账户余额 / 收益概览 -->
-		<view class="account-card zindex">
-			<view class="account-item" @click="routerGo('/pagesB/wallet/wallet')">
-				<view class="account-label">账户余额(元)</view>
-				<view class="account-value">{{ intall.balance || 0 }}</view>
-				<view class="account-link">去充值 ></view>
+		<!-- 账户余额和金币 -->
+		<view class="balance-card">
+			<view class="balance-item">
+				<view class="balance-label">账户余额</view>
+				<view class="balance-value">{{ intall.balance || 0 }}</view>
+				<view class="balance-link" @click="goToRecharge">去充值 ></view>
 			</view>
-			<view class="account-item" @click="goToEarnings">
-				<view class="account-label">累计收益(元)</view>
-				<view class="account-value">{{ earnings || 0 }}</view>
-				<view class="account-link">去提现 ></view>
-			</view>
-			<view class="account-item" @click="goToCommission">
-				<view class="account-label">佣金收入(元)</view>
-				<view class="account-value">{{ commission || 0 }}</view>
-				<view class="account-link">明细 ></view>
+			<view class="balance-divider"></view>
+			<view class="balance-item">
+				<view class="balance-label">我的金币</view>
+				<view class="balance-value">{{ goldCoins || 0 }}</view>
 			</view>
 		</view>
 
-		<!-- 功能菜单 -->
-		<view class="menu-section">
-			<view class="menu-grid">
-				<view class="menu-item" @click="goToMyTasks">
-					<view class="menu-icon">
-						<u-icon name="list" color="#49AFFF" size="28"></u-icon>
-					</view>
-					<view class="menu-text">我的任务</view>
+		<!-- 我的订单 -->
+		<view class="order-section">
+			<view class="section-header">
+				<view class="header-title">我的订单</view>
+				<view class="header-more" @click="goToAllOrders">全部 ></view>
+			</view>
+			<view class="order-tabs">
+				<view class="order-tab" @click="goToOrderByStatus('pending')">
+					<image class="tab-icon" src="../../static/me/order_auditing.png" mode="aspectFit"></image>
+					<view class="tab-text">审核中</view>
 				</view>
-				<view class="menu-item" @click="goToMyOrders">
-					<view class="menu-icon">
-						<u-icon name="order" color="#FF9800" size="28"></u-icon>
-					</view>
-					<view class="menu-text">我的订单</view>
+				<view class="order-tab" @click="goToOrderByStatus('rejected')">
+					<image class="tab-icon" src="../../static/me/order_rejected.png" mode="aspectFit"></image>
+					<view class="tab-text">未通过</view>
 				</view>
-				<view class="menu-item" @click="goToMyEarnings">
-					<view class="menu-icon">
-						<u-icon name="rmb-circle" color="#4CAF50" size="28"></u-icon>
-					</view>
-					<view class="menu-text">我的收益</view>
+				<view class="order-tab" @click="goToOrderByStatus('waiting')">
+					<image class="tab-icon" src="../../static/me/order_waiting.png" mode="aspectFit"></image>
+					<view class="tab-text">待开始</view>
 				</view>
-				<view class="menu-item" @click="goToMyCollect">
-					<view class="menu-icon">
-						<u-icon name="star" color="#FFC107" size="28"></u-icon>
-					</view>
-					<view class="menu-text">我的收藏</view>
+				<view class="order-tab" @click="goToOrderByStatus('ongoing')">
+					<image class="tab-icon" src="../../static/me/order_ongoing.png" mode="aspectFit"></image>
+					<view class="tab-text">进行中</view>
 				</view>
-				<view class="menu-item" @click="goToHelpCenter">
-					<view class="menu-icon">
-						<u-icon name="question-circle" color="#9C27B0" size="28"></u-icon>
-					</view>
-					<view class="menu-text">帮助中心</view>
-				</view>
-				<view class="menu-item" @click="goToSettings">
-					<view class="menu-icon">
-						<u-icon name="setting" color="#607D8B" size="28"></u-icon>
-					</view>
-					<view class="menu-text">设置</view>
+				<view class="order-tab" @click="goToOrderByStatus('confirming')">
+					<image class="tab-icon" src="../../static/me/order_confirming.png" mode="aspectFit"></image>
+					<view class="tab-text">待确认</view>
 				</view>
 			</view>
 		</view>
 
-		<!-- 推广区域 -->
-		<view class="promotion-section">
-			<view class="promotion-header">
-				<view class="header-title">推广赚钱</view>
-				<view class="header-desc">邀请好友使用，获得额外收益</view>
+		<!-- 我的任务 -->
+		<view class="task-section">
+			<view class="section-header">
+				<view class="header-title">我的任务</view>
 			</view>
-			<view class="promotion-content">
-				<view class="invite-card">
-					<view class="invite-info">
-						<view class="invite-count">{{ inviteCount || 0 }}</view>
-						<view class="invite-label">已邀请好友</view>
-					</view>
-					<button class="invite-btn" @click="shareApp">立即邀请</button>
+			<view class="task-grid">
+				<view class="task-item" @click="goToTaskCenter">
+					<image class="task-icon" src="../../static/me/task_center.png" mode="aspectFit"></image>
+					<view class="task-text">任务中心</view>
+				</view>
+				<view class="task-item" @click="goToAcceptedTasks">
+					<image class="task-icon" src="../../static/me/task_accepted.png" mode="aspectFit"></image>
+					<view class="task-text">已接任务</view>
+				</view>
+				<view class="task-item" @click="goToPublishedTasks">
+					<image class="task-icon" src="../../static/me/task_published.png" mode="aspectFit"></image>
+					<view class="task-text">已发布任务</view>
+				</view>
+				<view class="task-item" @click="goToTaskAudit">
+					<image class="task-icon" src="../../static/me/task_audit.png" mode="aspectFit"></image>
+					<view class="task-text">任务审核</view>
+				</view>
+			</view>
+		</view>
+
+		<!-- 更多服务 -->
+		<view class="service-section">
+			<view class="section-header">
+				<view class="header-title">更多服务</view>
+			</view>
+			<view class="service-grid">
+				<view class="service-item" @click="goToPersonalInfo">
+					<image class="service-icon" src="../../static/me/service_profile.png" mode="aspectFit"></image>
+					<view class="service-text">个人资料</view>
+				</view>
+				<view class="service-item" @click="toggleWechatNotice">
+					<image class="service-icon" src="../../static/me/service_wechat.png" mode="aspectFit"></image>
+					<view class="service-text">开启微信通知</view>
+				</view>
+				<view class="service-item" @click="goToOnlineService">
+					<image class="service-icon" src="../../static/me/service_customer.png" mode="aspectFit"></image>
+					<view class="service-text">在线客服</view>
+				</view>
+				<view class="service-item" @click="join交流群">
+					<image class="service-icon" src="../../static/me/service_group.png" mode="aspectFit"></image>
+					<view class="service-text">加入交流群</view>
+				</view>
+				<view class="service-item" @click="goToUserAgreement">
+					<image class="service-icon" src="../../static/me/service_agreement.png" mode="aspectFit"></image>
+					<view class="service-text">用户协议</view>
+				</view>
+				<view class="service-item" @click="goToPrivacyAgreement">
+					<image class="service-icon" src="../../static/me/service_privacy.png" mode="aspectFit"></image>
+					<view class="service-text">隐私协议</view>
+				</view>
+				<view class="service-item" @click="goToRechargeAgreement">
+					<image class="service-icon" src="../../static/me/service_recharge.png" mode="aspectFit"></image>
+					<view class="service-text">充值协议</view>
+				</view>
+				<view class="service-item" @click="goToSelfDelivery">
+					<image class="service-icon" src="../../static/me/service_delivery.png" mode="aspectFit"></image>
+					<view class="service-text">自助投放</view>
+				</view>
+				<view class="service-item" @click="goToPromote">
+					<image class="service-icon" src="../../static/me/service_promote.png" mode="aspectFit"></image>
+					<view class="service-text">我要推广</view>
 				</view>
 			</view>
 		</view>
@@ -115,9 +134,8 @@ export default {
 		return {
 			intall: {},
 			token: null,
-			earnings: 128.50,
-			commission: 45.20,
-			inviteCount: 12
+			goldCoins: 0,
+			userPhone: '15068916196'
 		}
 	},
 	onLoad() {
@@ -148,72 +166,120 @@ export default {
 			}
 		},
 		
-		// 前往收益页面
-		goToEarnings() {
+		// 去充值
+		goToRecharge() {
 			uni.navigateTo({
-				url: '/pages/me/earnings'
+				url: '/pagesB/recharge/recharge'
 			});
 		},
 		
-		// 前往佣金页面
-		goToCommission() {
-			uni.navigateTo({
-				url: '/pages/me/commission'
-			});
-		},
-		
-		// 前往我的任务
-		goToMyTasks() {
-			uni.navigateTo({
-				url: '/pages/me/myTasks'
-			});
-		},
-		
-		// 前往我的订单
-		goToMyOrders() {
+		// 去全部订单
+		goToAllOrders() {
 			uni.navigateTo({
 				url: '/pages/order/order'
 			});
 		},
 		
-		// 前往我的收益
-		goToMyEarnings() {
+		// 根据状态去订单
+		goToOrderByStatus(status) {
 			uni.navigateTo({
-				url: '/pages/me/myEarnings'
+				url: `/pages/order/order?status=${status}`
 			});
 		},
 		
-		// 前往我的收藏
-		goToMyCollect() {
+		// 去任务中心
+		goToTaskCenter() {
 			uni.navigateTo({
-				url: '/pages/me/myCollect'
+				url: '/pagesA/taskCenter/taskCenter'
 			});
 		},
 		
-		// 前往帮助中心
-		goToHelpCenter() {
+		// 去已接任务
+		goToAcceptedTasks() {
 			uni.navigateTo({
-				url: '/pages/me/helpCenter'
+				url: '/pagesA/taskAccepted/taskAccepted'
 			});
 		},
 		
-		// 前往设置
-		goToSettings() {
+		// 去已发布任务
+		goToPublishedTasks() {
 			uni.navigateTo({
-				url: '/pages/me/settings'
+				url: '/pagesA/taskPublished/taskPublished'
 			});
 		},
 		
-		// 分享应用
-		shareApp() {
-			uni.showActionSheet({
-				itemList: ['分享给微信好友', '分享到朋友圈', '复制链接'],
-				success: (res) => {
-					uni.showToast({
-						title: '功能开发中...',
-						icon: 'none'
-					});
-				}
+		// 去任务审核
+		goToTaskAudit() {
+			uni.navigateTo({
+				url: '/pagesA/taskAudit/taskAudit'
+			});
+		},
+		
+		// 去个人资料
+		goToPersonalInfo() {
+			uni.navigateTo({
+				url: '/pagesA/personage/personage'
+			});
+		},
+		
+		// 开启微信通知
+		toggleWechatNotice() {
+			uni.showToast({
+				title: '功能开发中...',
+				icon: 'none'
+			});
+		},
+		
+		// 在线客服
+		goToOnlineService() {
+			uni.showToast({
+				title: '功能开发中...',
+				icon: 'none'
+			});
+		},
+		
+		// 加入交流群
+		join交流群() {
+			uni.showToast({
+				title: '功能开发中...',
+				icon: 'none'
+			});
+		},
+		
+		// 去用户协议
+		goToUserAgreement() {
+			uni.navigateTo({
+				url: '/pagesA/agreement/agreement?type=user'
+			});
+		},
+		
+		// 去隐私协议
+		goToPrivacyAgreement() {
+			uni.navigateTo({
+				url: '/pagesA/agreement/agreement?type=privacy'
+			});
+		},
+		
+		// 去充值协议
+		goToRechargeAgreement() {
+			uni.navigateTo({
+				url: '/pagesA/agreement/agreement?type=recharge'
+			});
+		},
+		
+		// 去自助投放
+		goToSelfDelivery() {
+			uni.showToast({
+				title: '功能开发中...',
+				icon: 'none'
+			});
+		},
+		
+		// 去我要推广
+		goToPromote() {
+			uni.showToast({
+				title: '功能开发中...',
+				icon: 'none'
 			});
 		}
 	}
@@ -221,198 +287,186 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bgImg {
-	width: 100%;
-	height: 400rpx;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 1;
-}
-
-.top-box {
-	width: 100%;
-	height: 400rpx;
-	position: relative;
-	z-index: 2;
+.me-container {
+	min-height: 100vh;
+	background: #f5f5f5;
 	
-	.user-box {
-		width: 100%;
-		height: 400rpx;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column;
+	.user-section {
+		background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+		padding: 40rpx 30rpx;
+		color: white;
 		
-		.text_center {
-			text-align: center;
+		.user-info {
+			display: flex;
+			align-items: center;
 			
-			.yes-box {
-				position: relative;
+			.avatar {
 				width: 120rpx;
 				height: 120rpx;
 				border-radius: 50%;
-				overflow: hidden;
-				margin: 0 auto 20rpx;
-				
-				image {
-					width: 100%;
-					height: 100%;
-				}
-				
-				.edit {
-					position: absolute;
-					bottom: 0;
-					right: 0;
-					width: 30rpx;
-					height: 30rpx;
-					background: white;
-					border-radius: 50%;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-				}
+				border: 3rpx solid rgba(255,255,255,0.5);
+				margin-right: 20rpx;
 			}
 			
-			.user-name {
-				font-size: 32rpx;
-				font-weight: bold;
-				color: white;
-				margin-bottom: 10rpx;
+			.user-details {
+				flex: 1;
+				
+				.user-name {
+					font-size: 36rpx;
+					font-weight: bold;
+					margin-bottom: 10rpx;
+				}
+				
+				.user-phone {
+					font-size: 28rpx;
+					opacity: 0.9;
+				}
 			}
 		}
 	}
-}
-
-.account-card {
-	position: relative;
-	z-index: 3;
-	background: white;
-	margin: -60rpx 30rpx 30rpx;
-	border-radius: 20rpx;
-	padding: 30rpx;
-	box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.1);
 	
-	.account-item {
+	.balance-card {
+		background: white;
+		margin: -30rpx 30rpx 30rpx;
+		border-radius: 20rpx;
+		padding: 30rpx;
+		box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.1);
+		display: flex;
+		justify-content: space-around;
+		
+		.balance-item {
+			flex: 1;
+			text-align: center;
+			
+			.balance-label {
+				font-size: 26rpx;
+				color: #666;
+				margin-bottom: 10rpx;
+			}
+			
+			.balance-value {
+				font-size: 48rpx;
+				font-weight: bold;
+				color: #333;
+				margin-bottom: 10rpx;
+			}
+			
+			.balance-link {
+				font-size: 24rpx;
+				color: #ff6b6b;
+			}
+		}
+		
+		.balance-divider {
+			width: 1rpx;
+			background: #eee;
+			margin: 0 30rpx;
+		}
+	}
+	
+	.section-header {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 20rpx 0;
-		border-bottom: 1rpx solid #eee;
-		
-		&:last-child {
-			border-bottom: none;
-		}
-		
-		.account-label {
-			font-size: 26rpx;
-			color: #666;
-		}
-		
-		.account-value {
-			font-size: 36rpx;
-			font-weight: bold;
-			color: #333;
-		}
-		
-		.account-link {
-			font-size: 24rpx;
-			color: #49AFFF;
-		}
-	}
-}
-
-.menu-section {
-	background: white;
-	margin: 0 30rpx;
-	border-radius: 20rpx;
-	padding: 30rpx 0;
-	box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.1);
-	
-	.menu-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 30rpx;
-		
-		.menu-item {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			padding: 20rpx 10rpx;
-			
-			.menu-icon {
-				width: 80rpx;
-				height: 80rpx;
-				background: #f5f5f5;
-				border-radius: 50%;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				margin-bottom: 15rpx;
-			}
-			
-			.menu-text {
-				font-size: 26rpx;
-				color: #333;
-			}
-		}
-	}
-}
-
-.promotion-section {
-	background: white;
-	margin: 30rpx;
-	border-radius: 20rpx;
-	padding: 30rpx;
-	box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.1);
-	
-	.promotion-header {
-		text-align: center;
-		margin-bottom: 30rpx;
+		padding: 20rpx 30rpx;
+		background: white;
 		
 		.header-title {
 			font-size: 32rpx;
 			font-weight: bold;
 			color: #333;
-			margin-bottom: 10rpx;
 		}
 		
-		.header-desc {
+		.header-more {
 			font-size: 24rpx;
-			color: #666;
+			color: #999;
 		}
 	}
 	
-	.invite-card {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		background: linear-gradient(135deg, #49AFFF, #6a5af9);
-		color: white;
-		border-radius: 15rpx;
-		padding: 30rpx;
+	.order-section {
+		background: white;
+		margin-bottom: 20rpx;
 		
-		.invite-info {
-			flex: 1;
+		.order-tabs {
+			display: flex;
+			padding: 30rpx 0;
+			border-top: 1rpx solid #eee;
 			
-			.invite-count {
-				font-size: 48rpx;
-				font-weight: bold;
-				margin-bottom: 10rpx;
-			}
-			
-			.invite-label {
-				font-size: 24rpx;
+			.order-tab {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				
+				.tab-icon {
+					width: 60rpx;
+					height: 60rpx;
+					margin-bottom: 10rpx;
+				}
+				
+				.tab-text {
+					font-size: 24rpx;
+					color: #666;
+				}
 			}
 		}
+	}
+	
+	.task-section {
+		background: white;
+		margin-bottom: 20rpx;
 		
-		.invite-btn {
-			background: white;
-			color: #49AFFF;
-			border-radius: 50rpx;
-			padding: 15rpx 30rpx;
-			font-size: 26rpx;
-			font-weight: bold;
+		.task-grid {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			padding: 30rpx 0;
+			border-top: 1rpx solid #eee;
+			
+			.task-item {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				
+				.task-icon {
+					width: 60rpx;
+					height: 60rpx;
+					margin-bottom: 10rpx;
+				}
+				
+				.task-text {
+					font-size: 24rpx;
+					color: #666;
+				}
+			}
+		}
+	}
+	
+	.service-section {
+		background: white;
+		
+		.service-grid {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			padding: 30rpx 0;
+			border-top: 1rpx solid #eee;
+			
+			.service-item {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				padding: 20rpx 0;
+				
+				.service-icon {
+					width: 60rpx;
+					height: 60rpx;
+					margin-bottom: 10rpx;
+				}
+				
+				.service-text {
+					font-size: 24rpx;
+					color: #666;
+				}
+			}
 		}
 	}
 }

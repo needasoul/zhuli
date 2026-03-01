@@ -350,13 +350,7 @@
 				"pagePath": "pages/index/index",
 				"iconPath": "static/tabbar/home.png",
 				"selectedIconPath": "static/tabbar/home_select.png",
-				"text": "首页"
-			},
-			{
-				"pagePath": "pages/order/order",
-				"iconPath": "static/tabbar/order.png",
-				"selectedIconPath": "static/tabbar/order_select.png",
-				"text": "订单"
+				"text": "活动"
 			},
 			{
 				"pagePath": "pages/me/me",
