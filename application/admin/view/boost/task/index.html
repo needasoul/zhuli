@@ -1,0 +1,29 @@
+<div class="panel panel-default panel-intro">
+    <div class="panel-heading">
+        {:__('Datatable')}
+    </div>
+    <div class="panel-body">
+        {:__('Create a task first')}
+    </div>
+    <div class="panel-body no-padding">
+        <div id="myToolbar" class="hide-xs">
+            <a href="javascript:;" class="btn btn-success btn-refresh" title="{:__('Refresh')}">
+                <i class="fa fa-refresh"></i> {:__('Refresh')}
+            </a>
+            <a href="javascript:;" class="btn btn-danger btn-multi btn-disabled" title="{:__('Delete')}" data-url="boost/task/del">
+                <i class="fa fa-times"></i> {:__('Delete')}
+            </a>
+            <a href="javascript:;" class="btn btn-warning btn-multi" title="{:__('Audit Pass')}" data-url="boost/task/audit?action=pass">
+                <i class="fa fa-check"></i> {:__('Audit Pass')}
+            </a>
+            <a href="javascript:;" class="btn btn-info btn-multi" title="{:__('Audit Reject')}" data-url="boost/task/audit?action=reject">
+                <i class="fa fa-times"></i> {:__('Audit Reject')}
+            </a>
+            <a href="javascript:;" class="btn btn-primary btn-multi" title="{:__('Set Status')}" data-url="boost/task/multi">
+                <i class="fa fa-cog"></i> {:__('Set Status')}
+            </a>
+        </div>
+        <table id="table" class="table table-striped table-bordered table-hover" width="100%">
+        </table>
+    </div>
+</div>

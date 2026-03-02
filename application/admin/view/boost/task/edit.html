@@ -1,0 +1,99 @@
+<div class="panel panel-default panel-intro">
+    <div class="panel-heading">
+        {:__('Edit')}
+    </div>
+    <div class="panel-body">
+        <form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+            <div class="form-group">
+                <label class="control-label col-sm-2">{:__('Title')}:</label>
+                <div class="col-sm-10">
+                    <input type="text" name="row[title]" class="form-control" value="{$row.title|htmlentities}" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">{:__('User')}:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="{$row.user.nickname|default=''} ({$row.user.username|default=''})" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">{:__('Category')}:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="{$row.category.name|default=''}" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">{:__('Platform')}:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="{$row.platform}" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">{:__('Price')}:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="¥{$row.price}" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">{:__('Total')}:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="{$row.total} 次" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">{:__('Completed')}:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="{$row.completed}/{$row.total}" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">{:__('Deposit')}:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="¥{$row.deposit}" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">{:__('Total Amount')}:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="¥{$row.total_amount}" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">{:__('Status')}:</label>
+                <div class="col-sm-10">
+                    <select name="row[status]" class="form-control">
+                        <option value="pending" {eq name="row.status" value="pending"}selected{/eq}>{:__('Pending Audit')}</option>
+                        <option value="active" {eq name="row.status" value="active"}selected{/eq}>{:__('Active')}</option>
+                        <option value="completed" {eq name="row.status" value="completed"}selected{/eq}>{:__('Completed')}</option>
+                        <option value="cancelled" {eq name="row.status" value="cancelled"}selected{/eq}>{:__('Cancelled')}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">{:__('Description')}:</label>
+                <div class="col-sm-10">
+                    <textarea name="row[description]" class="form-control" rows="3" readonly>{$row.description}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">{:__('Notes')}:</label>
+                <div class="col-sm-10">
+                    <textarea name="row[notes]" class="form-control" rows="3" readonly>{$row.notes}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">{:__('Link')}:</label>
+                <div class="col-sm-10">
+                    <a href="{$row.link}" target="_blank" class="form-control">{$row.link}</a>
+                </div>
+            </div>
+            <div class="form-group hide layer-footer">
+                <label class="control-label col-xs-12 col-sm-2"></label>
+                <div class="col-xs-12 col-sm-10">
+                    <button type="submit" class="btn btn-primary btn-embossed disabled">{:__('OK')}</button>
+                    <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

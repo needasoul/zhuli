@@ -113,10 +113,11 @@ class Boost extends Api
         
         Db::startTrans();
         try {
-            // 扣除用户余额
+            // 冻结用户余额（审核通过后才实际扣除）
             $user->setDec('money', $totalCost);
+            $user->setInc('freeze_money', $totalCost);
             
-            // 创建任务
+            // 创建任务（状态为待审核）
             $task = Task::create([
                 'user_id' => $this->auth->id,
                 'title' => $data['title'],
@@ -128,22 +129,23 @@ class Boost extends Api
                 'platform' => $data['platform'],
                 'link' => $data['link'],
                 'notes' => isset($data['notes']) ? $data['notes'] : '',
-                'status' => 'active',
+                'status' => 'pending',  // 待审核状态
+                'audit_status' => 'pending',  // 待审核
                 'deposit' => $deposit,
                 'total_amount' => $totalAmount
             ]);
             
-            // 创建订单记录
+            // 创建订单记录（待审核）
             Order::create([
                 'user_id' => $this->auth->id,
                 'task_id' => $task->id,
                 'type' => 'publish',
                 'amount' => $totalCost,
-                'status' => 'paid'
+                'status' => 'pending'
             ]);
             
             Db::commit();
-            $this->success('发布成功', $task);
+            $this->success('提交成功，请等待审核', $task);
             
         } catch (\Exception $e) {
             Db::rollback();

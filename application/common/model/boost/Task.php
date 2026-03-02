@@ -25,7 +25,8 @@ class Task extends Model
         'platform_name',
         'platform_icon',
         'progress',
-        'status_class'
+        'status_class',
+        'audit_status_text'
     ];
     
     /**
@@ -34,11 +35,34 @@ class Task extends Model
     public function getStatusList()
     {
         return [
+            'pending' => '待审核',
             'active' => '进行中',
             'completed' => '已完成',
             'cancelled' => '已取消',
             'expired' => '已过期'
         ];
+    }
+    
+    /**
+     * 审核状态列表
+     */
+    public function getAuditStatusList()
+    {
+        return [
+            'pending' => '待审核',
+            'passed' => '已通过',
+            'rejected' => '已拒绝'
+        ];
+    }
+    
+    /**
+     * 获取审核状态文本
+     */
+    public function getAuditStatusTextAttr($value, $data)
+    {
+        $value = $value ?: (isset($data['audit_status']) ? $data['audit_status'] : '');
+        $list = $this->getAuditStatusList();
+        return isset($list[$value]) ? $list[$value] : '';
     }
     
     /**
